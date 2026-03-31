@@ -1,0 +1,256 @@
+.nosotros-hero {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+}
+
+.nosotros-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nosotros-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.nosotros-content {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+}
+
+.nosotros-title {
+  color: #ffffff;
+  font-size: 80px;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.nosotros-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nosotros-btn {
+  background: #5a1648;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.nosotros-btn:hover {
+  transform: translateY(-3px);
+  background: #4a123b;
+}
+/* ================= HISTORIA ================= */
+
+.historia-section {
+  background: #ffffff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.historia-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.historia-title {
+  color: #5a1648;
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+/* línea decorativa 🔥 */
+.historia-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #5a1648;
+  margin: 12px auto 25px;
+  border-radius: 2px;
+}
+
+.historia-text {
+  color: #444;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+/* ================= SERVICIOS ================= */
+
+//.servicios-section {
+//  background: #5a1648;
+//  padding: 70px 20px;
+//  color: #fff;
+//}
+
+.servicios-section {
+  background: #ffffff;
+  padding: 60px 20px;
+}
+
+/* caja centrada en vez de full plano */
+.servicios-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #5a1648;
+  border-radius: 16px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.servicios-numero {
+  font-size: 110px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.9);
+}
+
+.servicios-info h2 {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.servicios-info p {
+  font-size: 17px;
+  max-width: 420px;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.promesa-section {
+  position: relative;
+  background: #f5f5f5;
+  padding: 100px 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* fondo decorativo (simula la imagen 🔥) */
+.promesa-section::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(90,22,72,0.08), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.promesa-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.promesa-title {
+  color: #5a1648;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.promesa-text {
+  color: #444;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.promesa-highlight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.promesa-numero {
+  font-size: 60px;
+  font-weight: 900;
+  color: #5a1648;
+}
+
+.promesa-highlight p {
+  max-width: 400px;
+  font-size: 15px;
+  color: #333;
+}
+
+.brands {
+  padding: 90px 0 70px;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.brands-header {
+  max-width: 760px;
+  margin: 0 auto 40px;
+}
+
+.brands-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.brands-track {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: max-content;
+  animation: scrollBrands 80s linear infinite;
+}
+
+.brand-item {
+  flex: 0 0 auto;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-item img {
+  max-height: 92px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.brands-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollBrands {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}

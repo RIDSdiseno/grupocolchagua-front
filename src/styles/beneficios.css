@@ -1,0 +1,251 @@
+.beneficios-hero {
+  position: relative;
+  height: 620px;
+  overflow: hidden;
+}
+
+.beneficios-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.beneficios-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.beneficios-content {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.beneficios-title {
+  color: #ffffff;
+  font-size: 88px;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.beneficios-actions {
+  margin-top: 34px;
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.beneficios-btn {
+  background: #5a1648;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.beneficios-btn:hover {
+  transform: translateY(-3px);
+  background: #4a123b;
+}
+
+.talana-section {
+  position: relative;
+  background: #5a1648;
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.talana-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.talana-logo {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.talana-text {
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.talana-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  gap: 34px 120px;
+  margin-top: 45px;
+}
+
+.talana-buttons button,
+.talana-main-btn {
+  background: #ffffff;
+  color: #5a1648;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  min-width: 300px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.talana-buttons button:hover,
+.talana-main-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.talana-main-btn {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: 220px;
+}
+
+/* MODAL */
+.talana-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 0, 11, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 9999;
+}
+
+.talana-modal {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+  max-width: 760px;
+  padding: 44px 42px;
+  border-radius: 4px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+
+.talana-modal-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.talana-modal-text {
+  margin: 0;
+  color: #4c3b47;
+  font-size: 17px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .beneficios-hero {
+    height: 520px;
+  }
+
+  .beneficios-title {
+    font-size: 64px;
+  }
+
+  .talana-buttons {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .talana-buttons button,
+  .talana-main-btn {
+    min-width: unset;
+    width: 100%;
+    max-width: 420px;
+    justify-self: center;
+  }
+
+  .talana-modal {
+    max-width: 680px;
+    padding: 36px 28px;
+  }
+
+  .talana-modal-close {
+    top: 8px;
+    right: 12px;
+    color: #5a1648;
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 576px) {
+  .beneficios-hero {
+    height: 440px;
+  }
+
+  .beneficios-title {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .beneficios-actions {
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .beneficios-btn {
+    width: 100%;
+    max-width: 260px;
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  .talana-section {
+    padding: 90px 16px;
+  }
+
+  .talana-logo {
+    width: 220px;
+  }
+
+  .talana-text {
+    font-size: 15px;
+  }
+
+  .talana-modal {
+    padding: 34px 20px 24px;
+  }
+
+  .talana-modal-text {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .talana-modal-close {
+    top: 8px;
+    right: 10px;
+    color: #5a1648;
+    font-size: 32px;
+  }
+}

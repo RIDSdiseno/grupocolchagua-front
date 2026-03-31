@@ -1,0 +1,336 @@
+.denuncia-page {
+  background: #f5f5f3;
+  padding: 42px 20px 80px;
+}
+
+.denuncia-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 48px 56px;
+}
+
+.denuncia-title {
+  margin: 0 0 26px 0;
+  color: #111111;
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.denuncia-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.denuncia-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #e6e2dd;
+}
+
+.denuncia-section:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.denuncia-section-title {
+  margin: 0;
+  color: #5a1648;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.denuncia-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+
+.denuncia-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.denuncia-field--full {
+  grid-column: 1 / -1;
+}
+
+.denuncia-field label {
+  font-size: 0.78rem;
+  color: #555555;
+  font-weight: 500;
+}
+
+.denuncia-group-label {
+  display: block;
+  margin: 0;
+  font-size: 0.78rem;
+  color: #555555;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.denuncia-help {
+  margin: -6px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #6d6d6d;
+}
+
+.denuncia-field > input,
+.denuncia-field > textarea {
+  width: 100%;
+  border: 1px solid #9a9a9a;
+  background: #ffffff;
+  padding: 12px 10px;
+  font-size: 0.95rem;
+  color: #222222;
+  outline: none;
+  border-radius: 0;
+}
+
+.denuncia-field > input:focus,
+.denuncia-field > textarea:focus {
+  border-color: #5a1648;
+}
+
+.denuncia-field > textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.denuncia-textarea-lg {
+  min-height: 240px !important;
+}
+
+.denuncia-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.denuncia-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #222222;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.denuncia-radio input {
+  margin-top: 3px;
+  accent-color: #5a1648;
+  flex-shrink: 0;
+}
+
+.denuncia-actions {
+  margin-top: 10px;
+}
+
+.denuncia-btn {
+  background: #5a1648;
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.denuncia-btn:hover {
+  transform: translateY(-2px);
+  background: #4a123b;
+}
+
+@media (max-width: 768px) {
+  .denuncia-page {
+    padding: 24px 16px 60px;
+  }
+
+  .denuncia-card {
+    padding: 28px 20px;
+  }
+
+  .denuncia-title {
+    font-size: 1.5rem;
+  }
+
+  .denuncia-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .denuncia-section {
+    padding-top: 20px;
+  }
+}
+.datepicker-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* IMPORTANTÍSIMO para que el input ocupe todo el ancho */
+.datepicker-wrapper .react-datepicker-wrapper {
+  width: 100%;
+  display: block;
+}
+
+.datepicker-wrapper .react-datepicker__input-container {
+  width: 100%;
+  display: block;
+}
+
+.datepicker-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #2b9ad6;
+  z-index: 3;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.denuncia-field .denuncia-datepicker-input {
+  width: 100%;
+  display: block;
+  padding: 12px 10px 12px 50px;
+  border: 1px solid #9a9a9a;
+  background: #ffffff;
+  font-size: 0.95rem;
+  color: #222222;
+  outline: none;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.denuncia-field .denuncia-datepicker-input:focus {
+  border-color: #2b9ad6;
+}
+
+/* calendario */
+.denuncia-datepicker-calendar {
+  font-family: inherit;
+  border: 1px solid #b9c7d3 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.react-datepicker {
+  font-family: inherit !important;
+  border: 1px solid #b9c7d3 !important;
+  border-radius: 0 !important;
+}
+
+.react-datepicker__header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #d8d8d8 !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+}
+
+.react-datepicker__month-dropdown-container,
+.react-datepicker__year-dropdown-container {
+  margin: 0 6px !important;
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  border: 1px solid #c8c8c8;
+  background: #ffffff;
+  padding: 3px 6px;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  width: 2rem !important;
+  line-height: 2rem !important;
+  margin: 0.2rem !important;
+  font-size: 0.85rem !important;
+  color: #444 !important;
+}
+
+.react-datepicker__day:hover {
+  background: #e8f4fb !important;
+  border-radius: 0 !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background: #2b9ad6 !important;
+  color: #fff !important;
+  border-radius: 0 !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #2b9ad6 !important;
+}
+
+.denuncia-field--radio-group {
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.denuncia-group-label {
+  font-size: 0.78rem;
+  color: #555555;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.denuncia-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: #222222;
+}
+
+.denuncia-radio input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+}
+
+.denuncia-radio--long {
+  align-items: flex-start;
+}
+
+.denuncia-radio--long span {
+  line-height: 1.45;
+}
+
+.denuncia-help {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #777777;
+}
+
+.denuncia-btn--square {
+  border-radius: 0;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  background: #1e9bd7;
+}
+
+.denuncia-btn--square:hover {
+  background: #178cc3;
+}

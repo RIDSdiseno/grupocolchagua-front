@@ -119,16 +119,80 @@
 
 .denuncia-radio {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: #222222;
+  align-items: center;
+  position: relative;
+  gap: 0;
+  color: #333333;
   font-size: 0.95rem;
-  line-height: 1.45;
+  line-height: 1.5;
+  cursor: pointer;
 }
 
 .denuncia-radio input {
-  margin-top: 3px;
-  accent-color: #5a1648;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.denuncia-radio span {
+  position: relative;
+  display: block;
+  min-height: 20px;
+  padding-left: 30px;
+}
+
+.denuncia-radio span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  background: #ffffff;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.denuncia-radio:hover span::before {
+  transform: translateY(-50%) scale(1.06);
+}
+
+.denuncia-radio input[type="radio"]:checked + span::before {
+  background: #000000;
+  border-color: #000000;
+}
+
+.denuncia-radio input[type="radio"]:focus-visible + span::before {
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: 3px;
+}
+
+.denuncia-radio--long span::before {
+  top: 0.18em;
+  transform: none;
+}
+
+.denuncia-radio--long:hover span::before {
+  transform: scale(1.06);
+}
+
+.denuncia-radio--long input[type="radio"]:focus-visible + span::before {
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: 3px;
+}
+
+.denuncia-radio input[type="radio"] {
   flex-shrink: 0;
 }
 
@@ -299,15 +363,23 @@
 .denuncia-radio {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.92rem;
-  color: #222222;
+  position: relative;
+  gap: 0;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: #333333;
+  cursor: pointer;
 }
 
 .denuncia-radio input[type="radio"] {
-  width: 14px;
-  height: 14px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
   margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .denuncia-radio--long {

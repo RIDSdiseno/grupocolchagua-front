@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/contacto.css";
 import heroContacto from "../assets/logo/fondo_pagina_contacto.png";
@@ -16,7 +17,6 @@ import starken from "../assets/marcas/logo_starken-3-150x150.png";
 import vinaundurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
 import walmart from "../assets/marcas/logo_walmart.png";
 import xiaomi from "../assets/marcas/logo_xiaomi-150x150.png";
-import contactoImg from "../assets/nuestroequipo/fondo_imagen_contactanos_formulario.png";
 
 const BRANDS = [
   santaisabel,
@@ -50,127 +50,155 @@ export default function Contacto() {
 
         <div className="contacto-content">
           <div className="contacto-actions">
-            <a href="#trabaja" className="contacto-btn">
+            <Link to="/trabaja" className="contacto-btn">
               TRABAJA CON NOSOTROS
-            </a>
+            </Link>
 
-            <a href="#cotiza" className="contacto-btn">
+            <Link to="/cotizar" className="contacto-btn">
               COTIZA CON NOSOTROS
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="contacto-intro">
-         <div className="contacto-intro-container">
-            <h2 className="contacto-intro-title">
-                CONTACTATE CON
-                <br />
-                GRUPO COLCHAGUA
-            </h2>
-            <p className="contacto-intro-text">
-                ¿Quieres contactarte con Grupo Colchagua? ven a nuestras oficinas en el
-                horario y los días de atención señalados, puedes escribirnos a nuestro
-                correo o llamarnos a nuestro teléfono. Si tienes alguna duda como
-                postulante o empresa, también puedes llenar el formulario que esta al
-                final de la página y te contestaremos a la brevedad.
+        <div className="contacto-intro-container">
+          <h2 className="contacto-intro-title">
+            CONTACTATE CON
+            <br />
+            GRUPO COLCHAGUA
+          </h2>
+          <p className="contacto-intro-text">
+            ¿Quieres contactarte con Grupo Colchagua? ven a nuestras oficinas en el
+            horario y los días de atención señalados, puedes escribirnos a nuestro
+            correo o llamarnos a nuestro teléfono. Si tienes alguna duda como
+            postulante o empresa, también puedes llenar el formulario que esta al
+            final de la página y te contestaremos a la brevedad.
+          </p>
+        </div>
+      </section>
+
+      <section className="contacto-info-box">
+        <div className="contacto-info-box__inner">
+          <div className="contacto-info-box__left">
+            <p className="contacto-info-box__lead">
+              Envianos tu solicitud completando el formulario de contacto
+              <br />
+              Trabajaremos en la mejor propuesta para cumplir tus objetivo,
+              nosotros nos haremos cargo del resto.
             </p>
-          </div>
-        </section>
-
-        <section className="contacto-info-box">
-            <div className="contacto-info-box__inner">
-                <div className="contacto-info-box__left">
-                    <p className="contacto-info-box__lead">
-                        Envianos tu solicitud completando el formulario de contacto
-                        <br />
-                        Trabajaremos en la mejor propuesta para cumplir tus objetivo,
-                        nosotros nos haremos cargo del resto0
-                    </p>
-                    <h3 className="contacto-info-box__schedule">Lunes a Viernes 09:00 A 18:00</h3>
-                    <div className="contacto-info-box__content">
-                        <p>
-                            <strong>Casa matriz</strong>
-                            <br />
-                            Reclutamiento &amp; Selección &amp; Operaciones,
-                            <br />
-                            Herrera 345, Santiago.
-                        </p>
-                        <p>
-                            <strong>Santiago Centro</strong>
-                            <br />
-                            RRHH &amp; Administración &amp; Finanzas, Erasmo
-                            <br />
-                            Escala 2312, Santiago.
-                        </p>
-                        <p>Contacto@grupocolchagua.cl</p>
-                        <p>+56 2 2264 6300</p>
-                    </div>
-                </div>
-                <div className="contacto-info-box__right">
-                    <div className="contacto-map-card">
-                        <iframe
-                        title="Mapa Herrera 345 Santiago"
-                        src="https://www.google.com/maps?q=Herrera+345,+Santiago,+Chile&z=16&output=embed"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        />   
-                    </div>
-
-                    <div className="contacto-map-card">
-                        <iframe
-                        title="Mapa Erasmo Escala 2313 Santiago"
-                        src="https://www.google.com/maps?q=Erasmo+Escala+2313,+Santiago,+Chile&z=16&output=embed"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        />
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-     <section className="brands">
-          <div className="container">
-            <div className="section-header brands-header">
-              <h2 className="section-header__title">CONFÍAN EN</h2>
-              <h2 className="section-header__title">NOSOTROS</h2>
-              <p className="section-header__desc">
-                Nuestros clientes coní­an en nosotros y nos reconocen por el valor
-                agregado que siempre entregamos en cada uno de nuestros servicios.
+            <h3 className="contacto-info-box__schedule">
+              Lunes a Viernes 09:00 A 18:00
+            </h3>
+            <div className="contacto-info-box__content">
+              <p>
+                <strong>Casa matriz</strong>
+                <br />
+                Reclutamiento &amp; Selección &amp; Operaciones,
+                <br />
+                Herrera 345, Santiago.
               </p>
+              <p>
+                <strong>Santiago Centro</strong>
+                <br />
+                RRHH &amp; Administración &amp; Finanzas, Erasmo
+                <br />
+                Escala 2313, Santiago.
+              </p>
+              <p>Contacto@grupocolchagua.cl</p>
+              <p>+56 2 2264 6300</p>
+            </div>
+          </div>
+
+          <div className="contacto-info-box__right">
+            <div className="contacto-map-card">
+              <iframe
+                title="Mapa Herrera 345 Santiago"
+                src="https://www.google.com/maps?q=Herrera+345,+Santiago,+Chile&z=16&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
 
-            <div className="brands-slider">
-              <div className="brands-track">
-                {[...BRANDS, ...BRANDS].map((logo, index) => (
-                  <div key={index} className="brand-item">
-                    <img src={logo} alt={`Marca ${index + 1}`} />
+            <div className="contacto-map-card">
+              <iframe
+                title="Mapa Erasmo Escala 2313 Santiago"
+                src="https://www.google.com/maps?q=Erasmo+Escala+2313,+Santiago,+Chile&z=16&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="contacto-brands section-spacing clients-section">
+        <div className="home-container">
+          <div className="section-heading">
+            <span className="section-kicker">Clientes</span>
+            <h2 className="section-title">
+              Marcas que confían en nuestro trabajo
+            </h2>
+          </div>
+
+          <div
+            className="clients-marquee"
+            aria-label="Marcas clientes"
+          >
+            <div className="clients-marquee__track">
+              <div className="clients-marquee__group">
+                {BRANDS.map((logo, index) => (
+                  <div
+                    key={`brand-${index}`}
+                    className="client-logo-card"
+                  >
+                    <img
+                      src={logo}
+                      alt={`Marca ${index + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="clients-marquee__group" aria-hidden="true">
+                {BRANDS.map((logo, index) => (
+                  <div
+                    key={`brand-duplicate-${index}`}
+                    className="client-logo-card"
+                  >
+                    <img src={logo} alt="" loading="lazy" />
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </section>
-         <section className="contact-options-section">
-            <div className="contact-options-container">
-                <div className="contact-options-visual">
-                    <img src={contactoImg} 
-                    alt="Opciones de contacto Grupo Colchagua"
-                    className="contact-options-image"
-                     />
+        </div>
+      </section>
 
-                <a href="#services" className="contact-floating-btn contact-btn-left">
-                Cotiza con nosotros
-              </a>
-
-              <a href="#contact" className="contact-floating-btn contact-btn-right">
-                Trabaja con nosotros
-              </a>
-                </div>
+      <section className="section-spacing final-cta-section">
+        <div className="home-container">
+          <div className="final-cta-card">
+            <div>
+              <h2 className="final-cta-title">Contáctanos</h2>
+              <p className="final-cta-text">
+                Contáctanos eligiendo la opción que mas se ajuste a tus
+                necesidades.
+              </p>
             </div>
 
-        </section>
+            <div className="cta-buttons">
+              <Link to="/cotizar" className="home-button home-button--white">
+                Cotiza con nosotros
+              </Link>
+
+              <Link to="/trabaja" className="home-button home-button--white">
+                Trabaja con nosotros
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }

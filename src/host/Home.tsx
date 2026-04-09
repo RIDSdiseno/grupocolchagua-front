@@ -1,360 +1,366 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/home.css";
 
-import slide1 from "../assets/inicio/almacenamiento.png";
-import slide2 from "../assets/inicio/Hombre-vegetales-logo-scaled.png";
-import slide3 from "../assets/inicio/Hombres-cafe.png";
-import outsourcing from "../assets/nuestrosservicios/serviciosout.png";
-import transitorios from "../assets/inicio/almacenamiento.png";
-import capacitacion from "../assets/nuestrosservicios/formacion.png";
-import reclutamiento from "../assets/nuestrosservicios/reclutamiento.png";
-import reposicion from "../assets/inicio/Hombre-vegetales-logo-scaled.png";
-import medida from "../assets/nuestrosservicios/soluciones.png";
+import heroImage from "../assets/inicio/almacenamiento.png";
+import outsourcingImage from "../assets/nuestrosservicios/serviciosout.png";
+import transitoryImage from "../assets/inicio/Hombre-vegetales-logo-scaled.png";
+import trainingImage from "../assets/nuestrosservicios/formacion.png";
+import recruitingImage from "../assets/nuestrosservicios/reclutamiento.png";
+import customSolutionsImage from "../assets/nuestrosservicios/soluciones.png";
 import alvi from "../assets/marcas/logo_alvi-150x150.png";
 import bci from "../assets/marcas/logo_bci-150x150.png";
-import dps from "../assets/marcas/logo_dps_chile-150x150.png";
+import dpsChile from "../assets/marcas/logo_dps_chile-150x150.png";
 import easy from "../assets/marcas/logo_easy-150x150.png";
-import espacio from "../assets/marcas/logo_espacio_riesco-150x150.png";
+import espacioRiesco from "../assets/marcas/logo_espacio_riesco-150x150.png";
 import ikea from "../assets/marcas/logo_ikea-150x150.png";
-import ironmount from "../assets/marcas/logo_iron_mountain-150x150.png";
+import ironMountain from "../assets/marcas/logo_iron_mountain-150x150.png";
 import jumbo from "../assets/marcas/logo_jumbo-150x150.png";
 import paris from "../assets/marcas/logo_paris-150x150.png";
-import santaisabel from "../assets/marcas/logo_santa_isabel-150x150.png";
+import santaIsabel from "../assets/marcas/logo_santa_isabel-150x150.png";
 import sodimac from "../assets/marcas/logo_sodimac-150x150.png";
 import starken from "../assets/marcas/logo_starken-3-150x150.png";
-import vinaundurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
+import vinaUndurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
 import walmart from "../assets/marcas/logo_walmart.png";
 import xiaomi from "../assets/marcas/logo_xiaomi-150x150.png";
-import persona from "../assets/inicio/loquenosdiferencia.png";
-import equipo1 from "../assets/nuestroequipo/image_testimonio_david-300x267-1.png";
-import equipo2 from "../assets/nuestroequipo/image_testimonio_ornella-300x267.png";
-import equipo3 from "../assets/nuestroequipo/image_testimonio_jonathan-300x267.png";
-import equipo4 from "../assets/nuestroequipo/image_testimonio_lillian-300x267.png";
-import contactoImg from "../assets/nuestroequipo/fondo_imagen_contactanos_formulario.png";
+
+type IconName = "bolt" | "shield" | "map" | "support";
+
+type Stat = {
+  value: number;
+  suffix?: string;
+  label: string;
+};
 
 const SERVICES = [
   {
-    id: 1,
+    image: outsourcingImage,
     title: "Servicios Outsourcing",
-    img: outsourcing,
   },
   {
-    id: 2,
+    image: heroImage,
     title: "Servicios Transitorios",
-    img: transitorios,
   },
   {
-    id: 3,
+    image: trainingImage,
     title: "Formación y Capacitación",
-    img: capacitacion,
   },
   {
-    id: 4,
-    title: "Reclutamiento y selección",
-    img: reclutamiento,
+    image: recruitingImage,
+    title: "Reclutamiento y Selección",
   },
   {
-    id: 5,
+    image: transitoryImage,
     title: "Reposición Multimarca",
-    img: reposicion,
   },
   {
-    id: 6,
+    image: customSolutionsImage,
     title: "Soluciones a tu medida",
-    img: medida,
   },
 ];
 
-const TEAM_IMAGES = [
-  { id: 1, image: equipo1, alt: "David Ruz - Gerente de negocios" },
-  { id: 2, image: equipo2, alt: "Ornella González - Asistente Contable" },
-  { id: 3, image: equipo3, alt: "Jonathan Fernandez - Gerente RRHH" },
-  { id: 4, image: equipo4, alt: "Liliana Ulloa - Operaria Paris CD Renca" },
+const DIFFERENTIATORS = [
+  {
+    icon: "bolt" as IconName,
+    title: "Respuesta ágil",
+    description:
+      "Activamos equipos rápidamente según tus necesidades operativas.",
+  },
+  {
+    icon: "shield" as IconName,
+    title: "Cobertura nacional",
+    description:
+      "Presencia en distintas zonas del país para acompañar tu operación.",
+  },
+  {
+    icon: "map" as IconName,
+    title: "Servicios personalizados",
+    description:
+      "Soluciones adaptadas a cada cliente y tipo de operación.",
+  },
+  {
+    icon: "support" as IconName,
+    title: "Acompañamiento continuo",
+    description:
+      "Seguimiento constante para asegurar continuidad y resultados.",
+  },
 ];
 
-const BRANDS = [
-  santaisabel,
-  jumbo,
-  easy,
-  paris,
-  bci,
-  dps,
-  sodimac,
-  alvi,
-  starken,
-  ikea,
-  walmart,
-  espacio,
-  ironmount,
-  vinaundurraga,
-  xiaomi,
+const STATS: Stat[] = [
+  { value: 20, suffix: "+", label: "años de experiencia" },
+  { value: 350, suffix: "+", label: "empresas atendidas" },
+  { value: 5, label: "sedes operativas" },
+  { value: 3500, suffix: "+", label: "trabajadores asociados" },
 ];
 
-const STATS = [
-  { value: 10, prefix: "+", label: "AÃ±os de experiencia" },
-  { value: 5, prefix: "", label: "Sucursales a nivel nacional" },
-  { value: 3500, prefix: "+", label: "Trabajadores asociados" },
-  { value: 350, prefix: "+", label: "Clientes en Chile" },
+const CLIENTS = [
+  { name: "Walmart", logo: walmart },
+  { name: "Jumbo", logo: jumbo },
+  { name: "Sodimac", logo: sodimac },
+  { name: "Paris", logo: paris },
+  { name: "Easy", logo: easy },
+  { name: "IKEA", logo: ikea },
+  { name: "BCI", logo: bci },
+  { name: "Starken", logo: starken },
+  { name: "Alvi", logo: alvi },
+  { name: "Xiaomi", logo: xiaomi },
+  { name: "DPS Chile", logo: dpsChile },
+  { name: "Espacio Riesco", logo: espacioRiesco },
+  { name: "Iron Mountain", logo: ironMountain },
+  { name: "Santa Isabel", logo: santaIsabel },
+  { name: "Viña Undurraga", logo: vinaUndurraga },
 ];
+
+function HomeIcon({ name }: { name: IconName }) {
+  switch (name) {
+    case "bolt":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M13 2L5 13h5l-1 9l8-11h-5l1-9Z" />
+        </svg>
+      );
+    case "shield":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3l7 3v5c0 4.5-2.7 7.7-7 10c-4.3-2.3-7-5.5-7-10V6l7-3Zm-3 9l2 2l4-4" />
+        </svg>
+      );
+    case "map":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21s6-5.3 6-10a6 6 0 1 0-12 0c0 4.7 6 10 6 10Zm0-7.5a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5Z" />
+        </svg>
+      );
+    case "support":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 13v-1a8 8 0 0 1 16 0v1M7 15a2 2 0 0 1-2 2H4v-4h1a2 2 0 0 1 2 2Zm10 0a2 2 0 0 0 2 2h1v-4h-1a2 2 0 0 0-2 2Zm-9 3c1.1 1 2.5 1.5 4 1.5s2.9-.5 4-1.5" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 export default function Home() {
-  const slides = [slide1, slide2, slide3];
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [hasMoved, setHasMoved] = useState(false);
-
+  const statsRef = useRef<HTMLElement | null>(null);
+  const [shouldAnimateStats, setShouldAnimateStats] = useState(false);
   const [animatedValues, setAnimatedValues] = useState<number[]>(
     STATS.map(() => 0)
   );
 
-  const [hasStartedStats, setHasStartedStats] = useState(false);
-  const statsRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const target = statsRef.current;
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
-    setHasMoved(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || hasMoved) return;
-
-    const diff = e.clientX - startX;
-
-    if (Math.abs(diff) > 80) {
-      if (diff < 0) {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-      } else {
-        setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-      }
-
-      setHasMoved(true);
+    if (!target) {
+      return;
     }
-  };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [slides.length]);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasStartedStats) {
-          setHasStartedStats(true);
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldAnimateStats(true);
           observer.disconnect();
-
-          const duration = 2000;
-          const frameRate = 16;
-
-          const timers = STATS.map((stat, index) => {
-            const increment = stat.value / (duration / frameRate);
-            let current = 0;
-
-            const timer = window.setInterval(() => {
-              current += increment;
-
-              setAnimatedValues((prev) => {
-                const updated = [...prev];
-                updated[index] =
-                  current >= stat.value ? stat.value : Math.ceil(current);
-                return updated;
-              });
-
-              if (current >= stat.value) {
-                clearInterval(timer);
-              }
-            }, frameRate);
-
-            return timer;
-          });
-
-          return () => {
-            timers.forEach((timer) => clearInterval(timer));
-          };
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.35 }
     );
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
+    observer.observe(target);
 
     return () => observer.disconnect();
-  }, [hasStartedStats]);
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAnimateStats) {
+      return;
+    }
+
+    let frameId = 0;
+    const duration = 1600;
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      setAnimatedValues(
+        STATS.map((stat) => Math.round(stat.value * eased))
+      );
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(animate);
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [shouldAnimateStats]);
+
+  const formatStatValue = (stat: Stat, index: number) =>
+    `${animatedValues[index].toLocaleString("es-CL")}${stat.suffix ?? ""}`;
+
+  const renderClientLogo = (client: (typeof CLIENTS)[number], keyPrefix = "") => (
+    <div key={`${keyPrefix}${client.name}`} className="client-logo-card">
+      <img src={client.logo} alt={client.name} loading="lazy" />
+    </div>
+  );
 
   return (
     <Layout>
       <div className="home">
         <section
-          className={`hero ${isDragging ? "dragging" : ""}`}
+          className="hero"
           style={{
-            backgroundImage: `url(${slides[currentSlide]})`,
+            backgroundImage: `url(${heroImage})`,
           }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
         >
-          <div className="hero__overlay" />
+          <div className="hero-overlay" />
 
-          <div className="hero__content">
-            <p className="hero__subtitle">
-              En Grupo Colchagua ayudamos a las personas a encontrar empleo y a
-              las empresas hallar nuevos talentos. Somos la solución más integral
-              en Recursos Humanos para tu organización.
-            </p>
+          <div className="home-container hero-content">
+            <div className="hero-copy">
+              <h1 className="hero-title">Grupo Colchagua</h1>
 
-            <div className="hero__actions">
-              <a href="#contact" className="btn btn--primary">
-                TRABAJA CON NOSOTROS
-              </a>
+              <p className="hero-subtitle">Talento confiable para tu operación</p>
 
-              <a href="#services" className="btn btn--primary">
-                COTIZA CON NOSOTROS
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section className="services" id="services">
-          <div className="container">
-            <div className="section-header">
-              <h2 className="section-header__title">Nuestros Servicios</h2>
-              <p className="section-header__desc">
-                Contamos con un equipo multidisciplinario listo para acompañarte
-                en cada etapa de tu negocio.
+              <p className="hero-description">
+                Apoyamos a empresas con servicios transitorios, outsourcing y
+                reclutamiento.
               </p>
-            </div>
 
-            <div className="services__grid">
-              {SERVICES.map((s) => (
-                <div key={s.id} className="service-card">
-                  <h3 className="service-card__title">{s.title}</h3>
+              <div className="hero-actions">
+                <Link to="/cotizar" className="home-button home-button--primary">
+                  Cotiza con nosotros
+                </Link>
 
-                  <div
-                    className="service-card__img"
-                    style={{ backgroundImage: `url(${s.img})` }}
-                  >
-                    <button className="btn-ver">Ver más</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="brands">
-          <div className="container">
-            <div className="section-header brands-header">
-              <h2 className="section-header__title">CONFÍAN EN</h2>
-              <h2 className="section-header__title">NOSOTROS</h2>
-              <p className="section-header__desc">
-                Nuestros clientes coní­an en nosotros y nos reconocen por el valor
-                agregado que siempre entregamos en cada uno de nuestros servicios.
-              </p>
-            </div>
-
-            <div className="brands-slider">
-              <div className="brands-track">
-                {[...BRANDS, ...BRANDS].map((logo, index) => (
-                  <div key={index} className="brand-item">
-                    <img src={logo} alt={`Marca ${index + 1}`} />
-                  </div>
-                ))}
+                <Link to="/trabaja" className="home-button home-button--secondary">
+                  Trabaja con nosotros
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        <section ref={statsRef} className="home-stats-section">
-          <div className="home-stats-container">
-            <h2 className="home-stats-title">LOS NUMEROS HABLAN</h2>
+        <section className="section-spacing services-section" id="services">
+          <div className="home-container">
+            <div className="services-heading">
+              <h2 className="section-title services-title">Nuestros servicios</h2>
+            </div>
 
-            <div className="home-stats-pill">
+            <div className="services-grid">
+              {SERVICES.map((service) => (
+                <article key={service.title} className="service-feature-card">
+                  <div className="service-feature-card__image-wrap">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="service-feature-card__image"
+                    />
+                  </div>
+
+                  <div className="service-feature-card__body">
+                    <h3>{service.title}</h3>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-spacing differentiators-section">
+          <div className="home-container">
+            <div className="section-heading">
+              <h2 className="section-title">¿Por qué elegirnos?</h2>
+            </div>
+
+            <div className="differentiators-list">
+              {DIFFERENTIATORS.map((item) => (
+                <article key={item.title} className="differentiator-item">
+                  <div className="icon-badge icon-badge--soft">
+                    <HomeIcon name={item.icon} />
+                  </div>
+
+                  <div className="differentiator-item__content">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section ref={statsRef} className="section-spacing stats-section">
+          <div className="home-container">
+            <div className="section-heading">
+              <span className="section-kicker">Los números hablan</span>
+              <h2 className="section-title">
+                Experiencia operativa convertida en resultados medibles
+              </h2>
+            </div>
+
+            <div className="stats-grid">
               {STATS.map((stat, index) => (
-                <div className="home-stat-item" key={index}>
-                  <h3 className="home-stat-value">
-                    {stat.prefix}
-                    {animatedValues[index]}
-                  </h3>
-                  <p className="home-stat-label">{stat.label}</p>
-                </div>
+                <article key={stat.label} className="stat-card">
+                  <strong className="stat-card__value">
+                    {formatStatValue(stat, index)}
+                  </strong>
+                  <p className="stat-card__label">{stat.label}</p>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="difference-section">
-          <div className="difference-container">
-            <div className="difference-content">
-              <h2 className="difference-title">LO QUE NOS</h2>
-              <h2 className="difference-title">DIFERENCIA</h2>
-
-              <h3 className="difference-subtitle">
-                Compromiso con la mejora y
-                <br />
-                la atención a nuestros clientes
-              </h3>
+        <section className="section-spacing clients-section">
+          <div className="home-container">
+            <div className="section-heading">
+              <span className="section-kicker">Clientes</span>
+              <h2 className="section-title">
+                Marcas que confían en nuestro trabajo
+              </h2>
             </div>
 
-            <div className="difference-visual">
-              <img
-                src={persona}
-                alt="Trabajador"
-                className="difference-person"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className="team-section">
-          <div className="team-container">
-            <div className="team-header">
-              <h2 className="team-title">NUESTRO EQUIPO</h2>
-            </div>
-
-            <div className="team-grid">
-              {TEAM_IMAGES.map((member) => (
-                <div className="team-card" key={member.id}>
-                  <img
-                    src={member.image}
-                    alt={member.alt}
-                    className="team-card-image"
-                  />
+            <div className="clients-marquee" aria-label="Marcas clientes">
+              <div className="clients-marquee__track">
+                <div className="clients-marquee__group">
+                  {CLIENTS.map((client) => renderClientLogo(client))}
                 </div>
-              ))}
+
+                <div className="clients-marquee__group" aria-hidden="true">
+                  {CLIENTS.map((client) =>
+                    renderClientLogo(client, "duplicate-")
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="contact-options-section">
-          <div className="contact-options-container">
-            <div className="contact-options-visual">
-              <img
-                src={contactoImg}
-                alt="Opciones de contacto Grupo Colchagua"
-                className="contact-options-image"
-              />
+        <section className="section-spacing final-cta-section">
+          <div className="home-container">
+            <div className="final-cta-card">
+              <div>
+                <h2 className="final-cta-title">
+                  Contáctanos
+                </h2>
+                <p className="final-cta-text">
+                  Contáctanos eligiendo la opción que mas se ajuste
+                  a tus necesidades.
+                </p>
+              </div>
 
-              <a href="#services" className="contact-floating-btn contact-btn-left">
-                Cotiza con nosotros
-              </a>
+              <div className="cta-buttons">
+                <Link to="/cotizar" className="home-button home-button--white">
+                  Cotiza con nosotros
+                </Link>
 
-              <a href="#contact" className="contact-floating-btn contact-btn-right">
-                Trabaja con nosotros
-              </a>
+                <Link to="/trabaja" className="home-button home-button--white">
+                  Trabaja con nosotros
+                </Link>
+              </div>
             </div>
           </div>
         </section>

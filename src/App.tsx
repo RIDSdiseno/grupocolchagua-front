@@ -4,6 +4,8 @@ import Nosotros from "./host/Nosotros";
 import Beneficios from "./host/Beneficios";
 import Contacto from './host/Contacto';
 import Denuncia from './host/DenunciaLeyKarin';
+import Cotizar from "./host/Cotizar";
+import Trabaja from "./host/Trabaja";
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/beneficios" element={<Beneficios />} />
       <Route path="/contacto" element={<Contacto />} />
+      <Route path="/cotizar" element={<Cotizar />} />
+      <Route path="/trabaja" element={<Trabaja />} />
       <Route path="/denuncia" element={<Denuncia />} />
     </Routes>
   );

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/home.css";
+import ContactQuick from "../components/ContactQuick";
 
 import heroImage from "../assets/inicio/almacenamiento.png";
 import outsourcingImage from "../assets/nuestrosservicios/serviciosout.png";
@@ -29,7 +30,7 @@ type IconName = "bolt" | "shield" | "map" | "support";
 
 type Stat = {
   value: number;
-  suffix?: string;
+  prefix?: string;
   label: string;
 };
 
@@ -87,11 +88,11 @@ const DIFFERENTIATORS = [
   },
 ];
 
-const STATS: Stat[] = [
-  { value: 20, suffix: "+", label: "años de experiencia" },
-  { value: 350, suffix: "+", label: "empresas atendidas" },
-  { value: 5, label: "sedes operativas" },
-  { value: 3500, suffix: "+", label: "trabajadores asociados" },
+const STATS = [
+  { value: 10, label: "Años de experiencia", prefix: "+" },
+  { value: 5, label: "Sucursales a nivel nacional", prefix: "" },
+  { value: 3500, label: "Trabajadores asociados", prefix: "+" },
+  { value: 350, label: "Clientes en Chile", prefix: "+" },
 ];
 
 const CLIENTS = [
@@ -200,7 +201,7 @@ export default function Home() {
   }, [shouldAnimateStats]);
 
   const formatStatValue = (stat: Stat, index: number) =>
-    `${animatedValues[index].toLocaleString("es-CL")}${stat.suffix ?? ""}`;
+    `${stat.prefix ?? ""}${animatedValues[index].toLocaleString("es-CL")}`;
 
   const renderClientLogo = (client: (typeof CLIENTS)[number], keyPrefix = "") => (
     <div key={`${keyPrefix}${client.name}`} className="client-logo-card">
@@ -251,19 +252,23 @@ export default function Home() {
 
             <div className="services-grid">
               {SERVICES.map((service) => (
-                <article key={service.title} className="service-feature-card">
-                  <div className="service-feature-card__image-wrap">
+                <Link
+                  key={service.title}
+                  to="/servicios"
+                  className="service-card"
+                >
+                  <div className="service-card__image-wrap">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="service-feature-card__image"
+                      className="service-card__image"
                     />
                   </div>
 
-                  <div className="service-feature-card__body">
+                  <div className="service-card__body">
                     <h3>{service.title}</h3>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </div>
@@ -361,6 +366,7 @@ export default function Home() {
                   Trabaja con nosotros
                 </Link>
               </div>
+              <ContactQuick />
             </div>
           </div>
         </section>

@@ -6,6 +6,7 @@ import Contacto from './host/Contacto';
 import Denuncia from './host/DenunciaLeyKarin';
 import Cotizar from "./host/Cotizar";
 import Trabaja from "./host/Trabaja";
+import Servicios from "./host/Servicios";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/beneficios" element={<Beneficios />} />
+      <Route path="/servicios" element={<Servicios />} />
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/cotizar" element={<Cotizar />} />
       <Route path="/trabaja" element={<Trabaja />} />

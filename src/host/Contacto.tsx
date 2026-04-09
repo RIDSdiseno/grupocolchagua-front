@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/contacto.css";
+import ContactQuick from "../components/ContactQuick";
+
 import heroContacto from "../assets/logo/fondo_pagina_contacto.png";
 import alvi from "../assets/marcas/logo_alvi-150x150.png";
 import bci from "../assets/marcas/logo_bci-150x150.png";
@@ -196,6 +198,7 @@ export default function Contacto() {
                 Trabaja con nosotros
               </Link>
             </div>
+            <ContactQuick />
           </div>
         </div>
       </section>

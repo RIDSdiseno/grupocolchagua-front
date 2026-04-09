@@ -248,14 +248,14 @@
   margin-top: 14px;
 }
 
-.service-feature-card,
+.service-card,
 .stat-card,
 .client-logo-card {
   background: var(--home-surface);
   border: 1px solid var(--home-primary-border);
 }
 
-.service-feature-card__body h3,
+.service-card__body h3,
 .differentiator-item__content h3 {
   font-size: 1.3rem;
   line-height: 1.2;
@@ -317,43 +317,47 @@
   gap: 24px;
 }
 
-.service-feature-card {
+.service-card {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
   border-radius: 30px;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
   transition:
-    transform 0.28s ease,
-    box-shadow 0.28s ease,
-    border-color 0.28s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   box-shadow: var(--home-shadow-sm);
 }
 
-.service-feature-card:hover {
+.service-card:hover {
   transform: translateY(-8px);
   border-color: rgba(91, 23, 70, 0.22);
-  box-shadow: var(--home-shadow-md);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
-.service-feature-card__image-wrap {
+.service-card__image-wrap {
   position: relative;
   aspect-ratio: 16 / 11;
   overflow: hidden;
+  border-radius: 12px 12px 0 0;
 }
 
-.service-feature-card__image {
+.service-card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
-.service-feature-card:hover .service-feature-card__image {
-  transform: scale(1.04);
+.service-card:hover .service-card__image {
+  transform: scale(1.05);
 }
 
-.service-feature-card__body {
+.service-card__body {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -641,7 +645,7 @@
     font-size: 0.96rem;
   }
 
-  .service-feature-card__body,
+  .service-card__body,
   .differentiator-item,
   .stat-card,
   .final-cta-card {
@@ -655,8 +659,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .home-button,
-  .service-feature-card,
-  .service-feature-card__image,
+  .service-card,
+  .service-card__image,
   .clients-marquee__track,
   .client-logo-card img {
     transition: none;
@@ -675,4 +679,31 @@
   .clients-marquee__track {
     animation: none;
   }
+}
+
+.contact-quick {
+  margin-top: 20px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-quick a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.contact-quick a svg {
+  font-size: 16px;
+}
+
+.contact-quick a:hover {
+  opacity: 1;
+  text-decoration: underline;
 }

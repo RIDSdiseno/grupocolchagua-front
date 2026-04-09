@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/beneficios.css";
+import ContactQuick from "../components/ContactQuick";
 
 import heroBeneficios from "../assets/inicio/beneficios.png";
 import talana from "../assets/logo/TALANA.png";
@@ -218,6 +219,7 @@ export default function Beneficios() {
                   Trabaja con nosotros
                 </Link>
               </div>
+              <ContactQuick />
             </div>
           </div>
         </section>

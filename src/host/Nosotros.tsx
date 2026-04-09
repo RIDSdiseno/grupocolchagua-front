@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/nosotros.css";
+import ContactQuick from "../components/ContactQuick";
 
 import heroNosotros from "../assets/nuestrosservicios/NOSOTROS.png";
 import davidImage from "../assets/nuestroequipo/image_testimonio_david-300x267-1.png";
 import jonathanImage from "../assets/nuestroequipo/image_testimonio_jonathan-300x267.png";
-import lillianImage from "../assets/nuestroequipo/image_testimonio_lillian-300x267.png";
 import alvi from "../assets/marcas/logo_alvi-150x150.png";
 import bci from "../assets/marcas/logo_bci-150x150.png";
 import dps from "../assets/marcas/logo_dps_chile-150x150.png";
@@ -54,10 +54,7 @@ const TEAM_MEMBERS = [
     name: "Jonathan",
     image: jonathanImage,
   },
-  {
-    name: "Lillian",
-    image: lillianImage,
-  },
+
 ];
 
 const CLIENTS = [
@@ -119,9 +116,8 @@ export default function Nosotros() {
         </section>
 
         <section className="historia-section">
-          <div className="nosotros-container">
+          <div className="nosotros-container historia-layout">
             <div className="historia-card">
-              <span className="section-kicker">Nuestra esencia</span>
               <h2 className="section-title">NUESTRA HISTORIA</h2>
 
               <div className="historia-copy">
@@ -273,6 +269,7 @@ export default function Nosotros() {
                   Trabaja con nosotros
                 </Link>
               </div>
+              <ContactQuick />
             </div>
           </div>
         </section>

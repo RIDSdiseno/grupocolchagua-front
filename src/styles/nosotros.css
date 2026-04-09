@@ -203,17 +203,25 @@
   padding-top: 92px;
 }
 
+.historia-layout {
+  max-width: 980px;
+}
+
 .historia-card {
   display: grid;
-  gap: 22px;
-  max-width: 860px;
+  gap: 20px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
-  padding: 46px 52px;
+  padding: 44px;
   border: 1px solid var(--nosotros-border);
   border-radius: 34px;
-  background: rgba(255, 255, 255, 0.92);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(247, 244, 246, 0.94) 100%
+  );
   box-shadow: var(--nosotros-shadow-sm);
-  text-align: center;
 }
 
 .historia-copy {
@@ -405,7 +413,8 @@
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(320px, 380px));
+  justify-content: center;
   gap: 28px;
   align-items: start;
 }

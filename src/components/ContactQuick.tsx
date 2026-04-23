@@ -16,7 +16,7 @@ export default function ContactQuick() {
         target="_blank"
         rel="noreferrer"
       >
-        <FaWhatsapp /> WhatsApp
+        <FaWhatsapp /> WhatsApp: +56 9 3932 6442
       </a>
     </div>
   );

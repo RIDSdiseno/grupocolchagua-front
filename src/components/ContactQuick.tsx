@@ -1,11 +1,9 @@
-import { FaWhatsapp, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 export default function ContactQuick() {
   return (
     <div className="contact-quick">
-      <a href="tel:+56227646300">
-        <FaPhoneAlt /> +56 2 2764 6300
-      </a>
+
 
       <a href="mailto:contacto@grupocolchagua.cl">
         <FaEnvelope /> contacto@grupocolchagua.cl

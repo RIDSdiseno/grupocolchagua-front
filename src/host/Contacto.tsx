@@ -108,7 +108,6 @@ export default function Contacto() {
                 Escala 2313, Santiago.
               </p>
               <p>Contacto@grupocolchagua.cl</p>
-              <p>+56 2 2264 6300</p>
             </div>
           </div>
 

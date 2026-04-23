@@ -105,10 +105,7 @@ function Layout({ children }: LayoutProps) {
             </div>
 
             <div className="footer-column">
-              <h3>Contacto Comercial</h3>
-              <a href="tel:+56227646300" className="footer-link">
-                +56 2 2764 6300
-              </a>
+
               <a
                 href="mailto:contacto@grupocolchagua.cl"
                 className="footer-link"

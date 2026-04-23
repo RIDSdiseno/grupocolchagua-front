@@ -206,7 +206,7 @@ export default function Nosotros() {
               </h2>
               <p className="team-description">
                 Detras de cada servicio hay profesionales que coordinan,
-                acompanan y cuidan la calidad de cada operacion.
+                acompañan y cuidan la calidad de cada operacion.
               </p>
             </div>
 

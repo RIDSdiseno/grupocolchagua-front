@@ -1,0 +1,485 @@
+/* ===================================================
+   PostulacionModal — postulacion-modal.css
+   =================================================== */
+
+/* ── Backdrop ── */
+.pm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 4, 32, 0.80);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* ── Card ── */
+.pm-card {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow:
+    0 40px 90px rgba(10, 3, 22, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);
+}
+
+/* ── Close button ── */
+.pm-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s;
+  backdrop-filter: blur(4px);
+  line-height: 1;
+}
+
+.pm-close:hover {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+.pm-header {
+  position: relative;
+  min-height: 168px;
+  background: linear-gradient(135deg, #3a0e6e 0%, #5b1746 55%, #7a235f 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 32px 36px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pm-header--compact {
+  min-height: 96px;
+  padding: 20px 36px;
+  align-items: center;
+}
+
+.pm-header__deco {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 18%, rgba(200, 80, 255, 0.24), transparent 48%),
+    radial-gradient(circle at 12% 82%, rgba(255, 138, 42, 0.18), transparent 38%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03), transparent 70%);
+  pointer-events: none;
+}
+
+.pm-header__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.pm-header__eyebrow {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.pm-header__slogan {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.18;
+}
+
+.pm-header__slogan--sm {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.pm-header__logo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.pm-header__logo-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pm-header__logo-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.pm-header__empresa {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   BODY
+══════════════════════════════════════ */
+.pm-body {
+  padding: 32px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.pm-body--form {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.pm-body--success {
+  padding: 60px 36px;
+  gap: 14px;
+}
+
+/* Logo empresa — paso 1 */
+.pm-logo-wrap {
+  width: 88px;
+  height: 88px;
+  border-radius: 16px;
+  border: 1.5px solid #ede8ed;
+  background: #f7f4f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 18px rgba(91, 23, 70, 0.1);
+  flex-shrink: 0;
+}
+
+.pm-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Títulos */
+.pm-title {
+  font-size: 1.42rem;
+  font-weight: 900;
+  color: #1d1820;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.pm-title--sm {
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.pm-sub {
+  font-size: 0.96rem;
+  color: #635a67;
+  line-height: 1.65;
+  margin: 0 0 22px;
+  max-width: 400px;
+}
+
+/* Pills */
+.pm-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.pm-pill {
+  display: inline-block;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5b1746;
+  background: rgba(91, 23, 70, 0.09);
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+
+.pm-pill--cargo {
+  color: #3d2a00;
+  background: #f5edda;
+}
+
+/* ══════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════ */
+.pm-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #5b1746 0%, #7a235f 100%);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 14px 36px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(91, 23, 70, 0.32);
+  transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
+  width: 100%;
+  font-family: inherit;
+}
+
+.pm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(91, 23, 70, 0.44);
+  filter: brightness(1.08);
+}
+
+.pm-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #635a67;
+  border: 1.5px solid #e0d8e0;
+  border-radius: 100px;
+  padding: 12px 22px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s;
+  white-space: nowrap;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.pm-btn-ghost:hover {
+  border-color: #5b1746;
+  color: #5b1746;
+}
+
+/* ══════════════════════════════════════
+   FORMULARIO
+══════════════════════════════════════ */
+.pm-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pm-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pm-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4a3d50;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pm-form__label--full {
+  grid-column: 1 / -1;
+}
+
+.pm-form__input {
+  border: 1.5px solid #e4dde8;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 0.93rem;
+  color: #1d1820;
+  background: #faf9fb;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pm-form__input:focus {
+  border-color: #5b1746;
+  box-shadow: 0 0 0 3px rgba(91, 23, 70, 0.1);
+  background: #fff;
+}
+
+.pm-form__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23635a67' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+/* File upload */
+.pm-form__file-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1.5px dashed #c4b8c2;
+  border-radius: 10px;
+  padding: 11px 14px;
+  background: #faf9fb;
+  gap: 10px;
+  transition: border-color 0.18s;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pm-form__file-wrap:hover {
+  border-color: #5b1746;
+}
+
+.pm-form__file-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #635a67;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: inherit;
+}
+
+.pm-form__file-btn {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #5b1746;
+  background: rgba(91, 23, 70, 0.09);
+  padding: 4px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  flex-shrink: 0;
+}
+
+.pm-form__file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* Actions */
+.pm-form__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.pm-form__actions .pm-btn-primary {
+  flex: 1;
+}
+
+/* ══════════════════════════════════════
+   SUCCESS
+══════════════════════════════════════ */
+.pm-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5b1746 0%, #7a235f 100%);
+  color: #fff;
+  font-size: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(91, 23, 70, 0.34);
+  margin-bottom: 4px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 620px) {
+  .pm-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .pm-card {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 93vh;
+  }
+
+  .pm-header {
+    min-height: 130px;
+    padding: 24px 24px;
+  }
+
+  .pm-header--compact {
+    min-height: 88px;
+    padding: 18px 24px;
+  }
+
+  .pm-body {
+    padding: 24px 22px 28px;
+  }
+
+  .pm-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .pm-header__slogan {
+    font-size: 1.2rem;
+  }
+}

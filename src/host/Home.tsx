@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/home.css";
 import ContactQuick from "../components/ContactQuick";
+import PromoPostulacionesModal from "../components/PromoPostulacionesModal";
 
 import heroImage from "../assets/inicio/almacenamiento.png";
 import outsourcingImage from "../assets/nuestrosservicios/serviciosout.png";
@@ -211,6 +212,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <PromoPostulacionesModal />
       <div className="home">
         <section
           className="hero"

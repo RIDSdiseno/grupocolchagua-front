@@ -5,6 +5,7 @@ import logoFooter from "../assets/logo/logo-colchagua-2.png";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
+
 type LayoutProps = {
   children: React.ReactNode;
 };
@@ -25,6 +26,7 @@ function Layout({ children }: LayoutProps) {
             <Link to="/nosotros">Nosotros</Link>
             <Link to="/beneficios">Beneficios</Link>
             <Link to="/contacto">Contacto</Link>
+            <Link to="/postulaciones">Postulaciones</Link>
             <a href="/denuncia" className="header-button">Denuncia Ley Karin</a>
             <a href="https://talana.com/es/remuneraciones/login-vue?next=/es/remuneraciones/#/">Ir a Talana</a>
 

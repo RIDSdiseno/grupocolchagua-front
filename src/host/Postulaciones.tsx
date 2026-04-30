@@ -183,6 +183,12 @@ type Oferta = (typeof OFERTAS)[0];
 export default function Postulaciones() {
   const [ofertaActiva, setOfertaActiva] = useState<Oferta | null>(null);
 
+  const scrollToOffers = () => {
+    document
+      .getElementById("ofertas-disponibles")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <Layout>
       <div className="lp-page">
@@ -190,9 +196,28 @@ export default function Postulaciones() {
         <HeroPostulaciones />
 
         {/* ── Ofertas destacadas ── */}
-        <section className="lp-section lp-ofertas-section" id="ofertas">
+        <section
+          className="lp-section lp-ofertas-section"
+          id="ofertas-disponibles"
+        >
           <div className="lp-container">
-            
+            <div className="lp-section-head">
+              <span className="lp-label">Oportunidades laborales</span>
+              <h2 className="lp-section-title">
+                Encuentra una oferta que se ajuste a ti
+              </h2>
+              <p className="lp-section-sub">
+                Revisa cargos disponibles, postula con tus datos y avanza hacia
+                una nueva oportunidad de trabajo y crecimiento.
+              </p>
+              <button
+                type="button"
+                className="lp-btn lp-btn--primary"
+                onClick={scrollToOffers}
+              >
+                Ver ofertas disponibles
+              </button>
+            </div>
 
             <div className="lp-ofertas-list" id="oportunidades">
               {OFERTAS.map((oferta) => (

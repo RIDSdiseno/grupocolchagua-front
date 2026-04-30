@@ -4,168 +4,122 @@ import "../styles/nosotros.css";
 import ContactQuick from "../components/ContactQuick";
 
 import heroNosotros from "../assets/nuestrosservicios/NOSOTROS.png";
-import davidImage from "../assets/nuestroequipo/image_testimonio_david-300x267-1.png";
-import jonathanImage from "../assets/nuestroequipo/image_testimonio_jonathan-300x267.png";
-import alvi from "../assets/marcas/logo_alvi-150x150.png";
-import bci from "../assets/marcas/logo_bci-150x150.png";
-import dps from "../assets/marcas/logo_dps_chile-150x150.png";
-import easy from "../assets/marcas/logo_easy-150x150.png";
-import espacio from "../assets/marcas/logo_espacio_riesco-150x150.png";
-import ikea from "../assets/marcas/logo_ikea-150x150.png";
-import ironmount from "../assets/marcas/logo_iron_mountain-150x150.png";
-import jumbo from "../assets/marcas/logo_jumbo-150x150.png";
-import paris from "../assets/marcas/logo_paris-150x150.png";
-import santaisabel from "../assets/marcas/logo_santa_isabel-150x150.png";
-import sodimac from "../assets/marcas/logo_sodimac-150x150.png";
-import starken from "../assets/marcas/logo_starken-3-150x150.png";
-import vinaundurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
-import walmart from "../assets/marcas/logo_walmart.png";
-import xiaomi from "../assets/marcas/logo_xiaomi-150x150.png";
 
-const DIFFERENCE_POINTS = [
+const VALUES = [
   {
-    title: "Respuesta agil",
+    title: "Compromiso",
     description:
-      "Activamos equipos con rapidez y orden para responder a cada necesidad operativa.",
+      "Acompañamos a clientes y trabajadores con responsabilidad en cada etapa del servicio.",
   },
   {
-    title: "Cobertura nacional",
+    title: "Transparencia",
     description:
-      "Acompanamos operaciones en distintas zonas del pais con vision local y estandar comun.",
+      "Promovemos relaciones claras, cercanas y basadas en la confianza.",
   },
   {
-    title: "Soluciones a medida",
+    title: "Agilidad",
     description:
-      "Disenamos servicios ajustados al ritmo, tamano y complejidad de cada cliente.",
+      "Respondemos con rapidez ante necesidades operativas y procesos de selección.",
   },
   {
-    title: "Seguimiento continuo",
+    title: "Excelencia",
     description:
-      "Mantenemos cercania, control y mejora constante en cada etapa del servicio.",
+      "Buscamos mejorar continuamente la calidad de nuestras soluciones.",
   },
-];
-
-const TEAM_MEMBERS = [
-  {
-    name: "David",
-    image: davidImage,
-  },
-  {
-    name: "Jonathan",
-    image: jonathanImage,
-  },
-
-];
-
-const CLIENTS = [
-  { name: "Santa Isabel", logo: santaisabel },
-  { name: "Jumbo", logo: jumbo },
-  { name: "Easy", logo: easy },
-  { name: "Paris", logo: paris },
-  { name: "BCI", logo: bci },
-  { name: "DPS Chile", logo: dps },
-  { name: "Sodimac", logo: sodimac },
-  { name: "Alvi", logo: alvi },
-  { name: "Starken", logo: starken },
-  { name: "IKEA", logo: ikea },
-  { name: "Walmart", logo: walmart },
-  { name: "Espacio Riesco", logo: espacio },
-  { name: "Iron Mountain", logo: ironmount },
-  { name: "Vina Undurraga", logo: vinaundurraga },
-  { name: "Xiaomi", logo: xiaomi },
 ];
 
 export default function Nosotros() {
-  const renderClientLogo = (
-    client: (typeof CLIENTS)[number],
-    keyPrefix = ""
-  ) => (
-    <div key={`${keyPrefix}${client.name}`} className="client-logo-card">
-      <img src={client.logo} alt={client.name} loading="lazy" />
-    </div>
-  );
-
   return (
     <Layout>
       <div className="nosotros-page">
         <section className="nosotros-hero">
           <img
             src={heroNosotros}
-            alt="Nosotros Grupo Colchagua"
+            alt="Equipo Grupo Colchagua"
             className="nosotros-hero-image"
           />
 
           <div className="nosotros-overlay" />
 
           <div className="nosotros-content">
-            <h1 className="nosotros-title">NOSOTROS</h1>
+            <span className="nosotros-hero-kicker">Nosotros</span>
+            <h1 className="nosotros-title">Grupo Colchagua</h1>
+            <p className="nosotros-hero-copy">
+              Conectamos empresas con talento y acompañamos oportunidades
+              laborales con un servicio cercano, ágil y profesional.
+            </p>
 
             <div className="nosotros-actions">
-              <Link to="/trabaja" className="nosotros-btn">
-                TRABAJA CON NOSOTROS
+              <Link to="/servicios" className="nosotros-btn">
+                Ver servicios
               </Link>
 
               <Link
-                to="/cotizar"
+                to="/postulaciones"
                 className="nosotros-btn nosotros-btn--secondary"
               >
-                COTIZA CON NOSOTROS
+                Trabaja con nosotros
               </Link>
             </div>
           </div>
         </section>
 
         <section className="historia-section">
-          <div className="nosotros-container historia-layout">
-            <div className="historia-card">
-              <h2 className="section-title">NUESTRA HISTORIA</h2>
+          <div className="nosotros-container nosotros-info-layout">
+            <article className="historia-card">
+              <span className="section-kicker">Quiénes somos</span>
+              <h2 className="section-title">Soluciones integrales en recursos humanos</h2>
 
               <div className="historia-copy">
                 <p>
-                  Desde hace mas de 10 anos somos una empresa especializada en
-                  Servicios Transitorios y Outsourcing, enfocada en la
-                  contratacion y gestion de talentos. Nuestro objetivo es
-                  brindar soluciones integrales a nuestros clientes,
-                  proporcionandoles personal calificado y comprometido para
-                  cubrir sus necesidades.
+                  Grupo Colchagua es una empresa especializada en servicios
+                  transitorios, outsourcing, payroll y reclutamiento. Apoyamos a
+                  organizaciones que necesitan equipos confiables y gestión
+                  profesional de personas.
                 </p>
-
                 <p>
-                  Valoramos la colaboracion, la transparencia y la excelencia en
-                  nuestros servicios. Queremos ser tu socio confiable en la
-                  contratacion de talentos y avanzar contigo hacia resultados
-                  sostenibles.
+                  Nuestro trabajo combina cobertura, experiencia operativa y
+                  cercanía para responder a las necesidades de cada cliente y
+                  postulante.
                 </p>
               </div>
+            </article>
+
+            <div className="nosotros-purpose-grid">
+              <article className="nosotros-purpose-card">
+                <span className="section-kicker">Misión</span>
+                <h2>Entregar un servicio profesional para cada necesidad</h2>
+                <p>
+                  Aportar soluciones de personas con atención específica,
+                  seguimiento y mejora permanente en cada operación.
+                </p>
+              </article>
+
+              <article className="nosotros-purpose-card">
+                <span className="section-kicker">Visión</span>
+                <h2>Ser un socio confiable en gestión de talento</h2>
+                <p>
+                  Consolidarnos como una empresa referente en recursos humanos
+                  por nuestra respuesta rápida, cercanía y calidad de servicio.
+                </p>
+              </article>
             </div>
           </div>
         </section>
 
         <section className="difference-section">
-          <div className="nosotros-container difference-layout">
+          <div className="nosotros-container">
             <div className="difference-copy">
-              <span className="section-kicker">Valor agregado</span>
-              <h2 className="section-title">LO QUE NOS DIFERENCIA</h2>
-              <p className="difference-subtitle">
-                Compromiso con la mejora y la atencion a nuestros clientes
-              </p>
+              <span className="section-kicker">Valores</span>
+              <h2 className="section-title">Lo que guía nuestro trabajo</h2>
               <p className="difference-text">
-                Nos enfocamos en ofrecer una experiencia cercana, agil y
-                profesional. Combinamos conocimiento operativo, gestion de
-                personas y acompanamiento permanente para construir relaciones
-                de largo plazo con cada cliente.
+                Nuestros valores ordenan la relación con clientes, trabajadores
+                y postulantes. Son la base de una experiencia profesional y
+                cercana.
               </p>
-
-              <div className="difference-highlight">
-                <strong>Compromiso real</strong>
-                <p>
-                  Mejoramos procesos y acompanamos cada operacion con foco en
-                  continuidad, servicio y respuesta oportuna.
-                </p>
-              </div>
 
               <div className="difference-grid">
-                {DIFFERENCE_POINTS.map((item) => (
+                {VALUES.map((item) => (
                   <article key={item.title} className="difference-card">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
@@ -176,96 +130,22 @@ export default function Nosotros() {
           </div>
         </section>
 
-        <section className="services-section">
-          <div className="nosotros-container">
-            <div className="services-panel">
-              <div className="services-panel__number">+25</div>
-
-              <div className="services-panel__body">
-                <span className="section-kicker section-kicker--light">
-                  Trayectoria
-                </span>
-                <h2>SERVICIOS INTEGRALES</h2>
-                <p>
-                  mil trabajadores que se han convertido en nuestros valiosos
-                  aliados a lo largo de nuestra historia.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="team-section">
-          <div className="nosotros-container">
-            <div className="team-header">
-              <span className="section-kicker section-kicker--light">
-                Personas
-              </span>
-              <h2 className="section-title section-title--light">
-                NUESTRO EQUIPO
-              </h2>
-              <p className="team-description">
-                Detras de cada servicio hay profesionales que coordinan,
-                acompañan y cuidan la calidad de cada operacion.
-              </p>
-            </div>
-
-            <div className="team-grid">
-              {TEAM_MEMBERS.map((member) => (
-                <article key={member.name} className="team-card">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="team-card__image"
-                  />
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section-spacing clients-section">
-          <div className="home-container">
-            <div className="section-heading">
-              <span className="section-kicker">Clientes</span>
-              <h2 className="section-title">
-                Marcas que confian en nuestro trabajo
-              </h2>
-            </div>
-
-            <div className="clients-marquee" aria-label="Marcas clientes">
-              <div className="clients-marquee__track">
-                <div className="clients-marquee__group">
-                  {CLIENTS.map((client) => renderClientLogo(client))}
-                </div>
-
-                <div className="clients-marquee__group" aria-hidden="true">
-                  {CLIENTS.map((client) =>
-                    renderClientLogo(client, "duplicate-")
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="section-spacing final-cta-section">
           <div className="home-container">
             <div className="final-cta-card">
               <div>
-                <h2 className="final-cta-title">Contactanos</h2>
+                <h2 className="final-cta-title">Hablemos</h2>
                 <p className="final-cta-text">
-                  Contactanos eligiendo la opcion que mas se ajuste
-                  a tus necesidades.
+                  Estamos disponibles para orientar a empresas y postulantes.
                 </p>
               </div>
 
               <div className="cta-buttons">
-                <Link to="/cotizar" className="home-button home-button--white">
-                  Cotiza con nosotros
+                <Link to="/servicios" className="home-button home-button--white">
+                  Ver servicios
                 </Link>
 
-                <Link to="/trabaja" className="home-button home-button--white">
+                <Link to="/postulaciones" className="home-button home-button--white">
                   Trabaja con nosotros
                 </Link>
               </div>

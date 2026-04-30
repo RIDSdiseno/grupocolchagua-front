@@ -1,14 +1,21 @@
 import "../styles/layout.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo/logo-colchagua.png";
 import logoFooter from "../assets/logo/logo-colchagua-2.png";
-import { FaWhatsapp } from "react-icons/fa";
-import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
-
+import { FaWhatsapp, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 type LayoutProps = {
   children: React.ReactNode;
 };
+
+const SERVICE_LINKS = [
+  { label: "Outsourcing", href: "/servicios/outsourcing" },
+  { label: "Servicios Transitorios", href: "/servicios/servicios-transitorios" },
+  { label: "Formación y Capacitación", href: "/servicios/formacion-capacitacion" },
+  { label: "Reclutamiento y Selección", href: "/servicios/reclutamiento-seleccion" },
+  { label: "Reposición Multimarca", href: "/servicios/reposicion-multimarca" },
+  { label: "Soluciones a tu medida", href: "/servicios/soluciones-a-tu-medida" },
+];
 
 function Layout({ children }: LayoutProps) {
   return (
@@ -21,26 +28,50 @@ function Layout({ children }: LayoutProps) {
             </Link>
           </div>
 
-          <nav className="main-nav">
-            <Link to="/">Home</Link>
-            <Link to="/nosotros">Nosotros</Link>
-            <Link to="/beneficios">Beneficios</Link>
-            <Link to="/contacto">Contacto</Link>
-            <Link to="/postulaciones">Postulaciones</Link>
-            <a href="/denuncia" className="header-button">Denuncia Ley Karin</a>
-            <a href="https://talana.com/es/remuneraciones/login-vue?next=/es/remuneraciones/#/">Ir a Talana</a>
+          <nav className="main-nav" aria-label="Navegación principal">
+            <NavLink to="/">Home</NavLink>
+
+            <div className="nav-dropdown">
+              <NavLink to="/servicios" className="nav-dropdown__trigger">
+                Servicios
+              </NavLink>
+              <div className="nav-dropdown__menu" aria-label="Servicios">
+                {SERVICE_LINKS.map((service) => (
+                  <Link key={service.href} to={service.href}>
+                    {service.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <NavLink to="/postulaciones">Trabaja con nosotros</NavLink>
+            <NavLink to="/nosotros">Nosotros</NavLink>
+            <NavLink to="/contacto">Contacto</NavLink>
+            <a
+              href="https://talana.com/es/remuneraciones/login-vue?next=/es/remuneraciones/#/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ir a Talana
+            </a>
 
             <div className="social-icons">
-              <a href="https://www.linkedin.com/company/grupo-colchagua-est/"
+              <a
+                href="https://www.linkedin.com/company/grupo-colchagua-est/"
                 target="_blank"
-                rel="noreferer">
-                  <FaLinkedinIn />
-                </a>
-                <a href="https://www.instagram.com/grupo_colchaguaoficial/"
-                  target="_blank"
-                  rel="noreferrer">
-                    <FaInstagram />  
-                </a>
+                rel="noreferrer"
+                aria-label="LinkedIn de Grupo Colchagua"
+              >
+                <FaLinkedinIn />
+              </a>
+              <a
+                href="https://www.instagram.com/grupo_colchaguaoficial/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram de Grupo Colchagua"
+              >
+                <FaInstagram />
+              </a>
             </div>
           </nav>
         </div>
@@ -63,29 +94,24 @@ function Layout({ children }: LayoutProps) {
                 Sobre nosotros
               </Link>
               <Link to="/servicios" className="footer-link">
-                Nuestros Servicios
+                Nuestros servicios
+              </Link>
+              <Link to="/postulaciones" className="footer-link">
+                Trabaja con nosotros
               </Link>
               <Link to="/contacto" className="footer-link">
-                Sucursales
+                Contacto
               </Link>
-              <Link to="/beneficios" className="footer-link">
-                Beneficios
+              <Link to="/denuncia" className="footer-link">
+                Canal de denuncias / Ley Karin
               </Link>
-              <a
-                href="https://wa.me/56939326442"
-                target="_blank"
-                rel="noreferrer"
-                className="footer-link"
-              >
-                Solicitar Ayuda
-              </a>
             </div>
 
             <div className="footer-column">
               <h3>Atención General</h3>
               <p>Lunes a Viernes de 9:00 a 18:00 Hrs.</p>
               <p>Reclutamiento & Selección.</p>
-              <p>Operaciones: </p>
+              <p>Operaciones:</p>
               <a
                 href="https://www.google.com/maps?q=Herrera+345,+Santiago,+Chile"
                 target="_blank"
@@ -102,16 +128,13 @@ function Layout({ children }: LayoutProps) {
                 rel="noreferrer"
                 className="footer-link"
               >
-                Erasmo Escala 2313, Santiago
+                Erasmo Escala 2313, Santiago.
               </a>
             </div>
 
             <div className="footer-column">
-
-              <a
-                href="mailto:contacto@grupocolchagua.cl"
-                className="footer-link"
-              >
+              <h3>Contacto</h3>
+              <a href="mailto:contacto@grupocolchagua.cl" className="footer-link">
                 contacto@grupocolchagua.cl
               </a>
               <a
@@ -145,6 +168,7 @@ function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </footer>
+
       <a
         href="https://wa.me/56939326442"
         target="_blank"

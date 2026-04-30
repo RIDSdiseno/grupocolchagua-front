@@ -18,12 +18,12 @@ export default function HeroPostulaciones() {
             <span className="hp-hero__kicker">Grupo Colchagua</span>
 
             <h1 className="hp-hero__title">
-              Postula hoy y encuentra tu proximo trabajo
+              Encuentra nuevas oportunidades laborales
             </h1>
 
             <p className="hp-hero__tagline">
-              Tu trabajo ideal esta a un{" "}
-              <span className="hp-hero__glow">CLICK</span>
+              Postula a ofertas activas, crece profesionalmente y conecta con
+              empresas que necesitan tu talento.
             </p>
           </div>
         </div>

@@ -129,6 +129,27 @@
   text-align: center;
 }
 
+.nosotros-hero-kicker {
+  justify-self: center;
+  display: inline-flex;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nosotros-hero-copy {
+  justify-self: center;
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.65;
+}
+
 .nosotros-title {
   color: #ffffff;
   font-size: clamp(3.2rem, 8vw, 5.6rem);
@@ -207,6 +228,12 @@
   max-width: 980px;
 }
 
+.nosotros-info-layout {
+  display: grid;
+  gap: 24px;
+  max-width: 1080px;
+}
+
 .historia-card {
   display: grid;
   gap: 20px;
@@ -233,6 +260,35 @@
   color: var(--nosotros-muted);
   font-size: 1rem;
   line-height: 1.8;
+}
+
+.nosotros-purpose-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.nosotros-purpose-card {
+  display: grid;
+  gap: 16px;
+  padding: 34px;
+  border: 1px solid var(--nosotros-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--nosotros-shadow-sm);
+}
+
+.nosotros-purpose-card h2 {
+  color: var(--nosotros-text);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.nosotros-purpose-card p {
+  color: var(--nosotros-muted);
+  font-size: 1rem;
+  line-height: 1.75;
 }
 
 .difference-section {
@@ -716,6 +772,10 @@
     grid-template-columns: 1fr;
   }
 
+  .nosotros-purpose-grid {
+    grid-template-columns: 1fr;
+  }
+
   .brands-marquee,
   .clients-marquee {
     --brand-card-width: clamp(138px, 38vw, 176px);
@@ -772,7 +832,8 @@
 
   .historia-card,
   .difference-copy,
-  .services-panel {
+  .services-panel,
+  .nosotros-purpose-card {
     padding: 24px 22px;
   }
 

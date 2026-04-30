@@ -91,6 +91,19 @@
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
 }
 
+.lp-btn--primary {
+  margin-top: 24px;
+  background: var(--lp-primary);
+  color: #ffffff;
+  box-shadow: 0 14px 32px rgba(91, 23, 70, 0.24);
+}
+
+.lp-btn--primary:hover {
+  background: var(--lp-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(91, 23, 70, 0.32);
+}
+
 .lp-btn--ghost {
   background: transparent;
   color: #fff;
@@ -213,6 +226,7 @@
 ══════════════════════════════════════ */
 .lp-ofertas-section {
   background: var(--lp-surface-alt);
+  scroll-margin-top: 100px;
 }
 
 .lp-ofertas-list {

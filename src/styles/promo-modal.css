@@ -1,176 +1,228 @@
-/* ===================================================
-   PromoPostulacionesModal — promo-modal.css
-   =================================================== */
-
 .promo-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(8, 6, 13, 0.68);
   z-index: 9000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  backdrop-filter: blur(3px);
+  padding: 18px;
+  background: rgba(20, 11, 18, 0.42);
+  backdrop-filter: blur(2px);
   animation: promoFadeIn 0.22s ease;
 }
 
 @keyframes promoFadeIn {
   from { opacity: 0; }
-  to   { opacity: 1; }
+  to { opacity: 1; }
 }
 
 .promo-modal {
   position: relative;
-  border-radius: 20px;
+  width: min(100%, 720px);
   overflow: hidden;
-  width: 100%;
-  max-width: 480px;
-  box-shadow: 0 32px 80px rgba(8, 6, 13, 0.5);
-  animation: promoSlideUp 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 18px;
+  background: #5b1746;
+  box-shadow: 0 28px 70px rgba(22, 9, 18, 0.26);
+  animation: promoSlideUp 0.28s ease;
 }
 
 @keyframes promoSlideUp {
-  from { transform: translateY(32px) scale(0.94); opacity: 0; }
-  to   { transform: translateY(0)     scale(1);    opacity: 1; }
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* ── Botón cerrar ── */
 .promo-modal__close {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
-  color: #5b1746;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
-  transition: background 0.15s, transform 0.15s;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: #5b1746;
+  font-size: 1.55rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(20, 8, 16, 0.18);
 }
 
 .promo-modal__close:hover {
-  background: #fff;
-  transform: scale(1.12);
+  background: #ffffff;
+  transform: translateY(-1px);
 }
 
-.promo-modal__close:focus-visible {
-  outline: 3px solid #aa3bff;
-  outline-offset: 2px;
-}
-
-/* ── Banner principal ── */
 .promo-modal__banner {
   position: relative;
-  cursor: pointer;
   display: block;
-  line-height: 0;
+  min-height: 390px;
+  padding: 48px 330px 44px 42px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(91, 23, 70, 0.96),
+    rgba(122, 35, 95, 0.86)
+  );
 }
 
-.promo-modal__banner:focus-visible {
-  outline: 3px solid #aa3bff;
-  outline-offset: -3px;
-}
-
-/* Imagen de fondo */
-.promo-modal__bg {
-  display: block;
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Overlay oscuro sobre la imagen */
-.promo-modal__overlay {
+.promo-modal__banner::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.42);
-  z-index: 1;
+  inset: auto -12% -36% 42%;
+  height: 70%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
 }
 
-/* Contenido centrado sobre la imagen */
 .promo-modal__content {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-  padding: 28px 28px 32px;
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  max-width: 350px;
+  color: #ffffff;
 }
 
-.promo-modal__bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
+.promo-modal__kicker {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .promo-modal__title {
-  color: #fff;
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  font-weight: 800;
-  line-height: 1.15;
+  max-width: 12ch;
   margin: 0;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  font-size: clamp(2.1rem, 5vw, 3.15rem);
+  font-weight: 850;
+  line-height: 1.02;
+  letter-spacing: 0;
 }
 
 .promo-modal__subtitle {
+  max-width: 34ch;
+  margin: 0;
   color: rgba(255, 255, 255, 0.88);
   font-size: 1rem;
-  font-weight: 400;
-  margin: 0;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
-  line-height: 1.4;
+  line-height: 1.62;
 }
 
-/* Botón "Postular" */
 .promo-modal__btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   margin-top: 8px;
-  padding: 13px 36px;
-  background: #5b1746;
-  color: #fff;
-  font-size: 0.97rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  border-radius: 100px;
-  box-shadow: 0 8px 24px rgba(91, 23, 70, 0.5);
-  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
-  white-space: nowrap;
+  padding: 0 30px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #5b1746;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 16px 34px rgba(22, 9, 18, 0.22);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.promo-modal__banner:hover .promo-modal__btn {
-  background: #441135;
+.promo-modal__btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(91, 23, 70, 0.6);
+  box-shadow: 0 20px 40px rgba(22, 9, 18, 0.28);
 }
 
-/* ── Mobile ── */
-@media (max-width: 520px) {
-  .promo-modal {
-    border-radius: 16px;
-    max-width: 100%;
+.promo-modal__visual {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: min(45%, 330px);
+  height: 100%;
+  pointer-events: none;
+}
+
+.promo-modal__person {
+  width: 100%;
+  max-width: 330px;
+  height: calc(100% + 56px);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 20px 28px rgba(20, 8, 16, 0.28));
+  transform: translateY(104px);
+}
+
+@media (max-width: 680px) {
+  .promo-overlay {
+    align-items: flex-end;
+    padding: 12px;
   }
 
-  .promo-modal__bg {
-    height: 300px;
+  .promo-modal {
+    border-radius: 16px;
+  }
+
+  .promo-modal__banner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    min-height: auto;
+    padding: 34px 24px 0;
+  }
+
+  .promo-modal__content {
+    max-width: none;
+    padding-right: 34px;
+  }
+
+  .promo-modal__title {
+    max-width: 13ch;
+  }
+
+  .promo-modal__subtitle {
+    max-width: 36ch;
+  }
+
+  .promo-modal__visual {
+    position: static;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    min-height: 220px;
+    margin-top: 4px;
+  }
+
+  .promo-modal__person {
+    width: min(82%, 260px);
+    height: 240px;
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .promo-modal__banner {
+    padding: 30px 20px 0;
+  }
+
+  .promo-modal__content {
+    gap: 14px;
+    padding-right: 28px;
   }
 
   .promo-modal__btn {
-    padding: 11px 28px;
-    font-size: 0.92rem;
+    width: 100%;
   }
 }

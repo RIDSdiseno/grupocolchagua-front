@@ -10,7 +10,7 @@ export default function ContactQuick() {
       </a>
 
       <a
-        href="https://wa.me/56939326442?text=Hola%20quiero%20información"
+        href="https://wa.me/56932316431?text=Hola%20quiero%20información"
         target="_blank"
         rel="noreferrer"
       >

@@ -44,7 +44,7 @@ function Layout({ children }: LayoutProps) {
               </div>
             </div>
 
-            <NavLink to="/postulaciones">Trabaja con nosotros</NavLink>
+            <NavLink to="/bolsa-de-trabajo">Bolsa de Trabajo</NavLink>
             <NavLink to="/nosotros">Nosotros</NavLink>
             <NavLink to="/contacto">Contacto</NavLink>
             <a
@@ -96,8 +96,8 @@ function Layout({ children }: LayoutProps) {
               <Link to="/servicios" className="footer-link">
                 Nuestros servicios
               </Link>
-              <Link to="/postulaciones" className="footer-link">
-                Trabaja con nosotros
+              <Link to="/bolsa-de-trabajo" className="footer-link">
+                Bolsa de Trabajo
               </Link>
               <Link to="/contacto" className="footer-link">
                 Contacto
@@ -138,7 +138,7 @@ function Layout({ children }: LayoutProps) {
                 contacto@grupocolchagua.cl
               </a>
               <a
-                href="https://wa.me/56939326442"
+                href="https://wa.me/56932316431"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-whatsapp"
@@ -170,7 +170,7 @@ function Layout({ children }: LayoutProps) {
       </footer>
 
       <a
-        href="https://wa.me/56939326442"
+        href="https://wa.me/56932316431"
         target="_blank"
         rel="noreferrer"
         className="whatsapp-float"

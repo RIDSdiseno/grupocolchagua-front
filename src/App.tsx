@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./host/Home";
 import Nosotros from "./host/Nosotros";
 import Beneficios from "./host/Beneficios";
@@ -8,7 +8,7 @@ import Cotizar from "./host/Cotizar";
 import Trabaja from "./host/Trabaja";
 import Servicios from "./host/Servicios";
 import ServicioDetalle from "./host/ServicioDetalle";
-import Postulaciones from "./host/Postulaciones";
+import BolsaDeTrabajo from "./host/BolsaDeTrabajo";
 
 function App() {
   return (
@@ -22,7 +22,8 @@ function App() {
       <Route path="/cotizar" element={<Cotizar />} />
       <Route path="/trabaja" element={<Trabaja />} />
       <Route path="/denuncia" element={<Denuncia />} />
-      <Route path="/postulaciones" element={<Postulaciones />} />
+      <Route path="/bolsa-de-trabajo" element={<BolsaDeTrabajo />} />
+      <Route path="/postulaciones" element={<Navigate to="/bolsa-de-trabajo" replace />} />
     </Routes>
   );
 }

@@ -21,6 +21,7 @@
     radial-gradient(circle at top left, rgba(91, 23, 70, 0.05), transparent 24%),
     linear-gradient(180deg, #ffffff 0%, #fbf9fa 100%);
   font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
+  overflow-x: clip;
 }
 
 .nosotros-page a {
@@ -828,6 +829,15 @@
   .nosotros-btn,
   .contact-floating-btn {
     width: 100%;
+    text-align: center;
+  }
+
+  .services-panel {
+    gap: 18px;
+  }
+
+  .services-panel__number {
+    font-size: clamp(3.5rem, 22vw, 5rem);
   }
 
   .historia-card,

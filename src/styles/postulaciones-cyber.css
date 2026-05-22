@@ -15,6 +15,7 @@
   --lp-pad:          96px;
   --lp-radius:       20px;
   --lp-radius-sm:    12px;
+  overflow-x: clip;
 }
 
 .lp-container {
@@ -78,6 +79,7 @@
   transition: transform 0.18s, box-shadow 0.18s, background 0.18s, border-color 0.18s;
   border: 2px solid transparent;
   white-space: nowrap;
+  text-align: center;
 }
 
 .lp-btn--white {
@@ -699,8 +701,13 @@
   }
 
   .lp-oferta-card__header {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
     gap: 12px;
+  }
+
+  .lp-oferta-card__logo-group {
+    min-width: 0;
   }
 
   .lp-oferta-card__logo-wrap {
@@ -744,11 +751,22 @@
   }
 
   .lp-cta-actions .lp-btn { text-align: center; }
+
+  .lp-btn,
+  .lp-btn-postular {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .lp-oferta-card__info,
+  .lp-oferta-card__zona {
+    padding: 22px;
+  }
 }
 
 @media (max-width: 460px) {
   .lp-logos-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .lp-hero__img-frame { max-width: 100%; }

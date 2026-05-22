@@ -423,6 +423,7 @@
   gap: 10px;
   align-items: center;
   margin-top: 6px;
+  width: 100%;
 }
 
 .pm-form__actions .pm-btn-primary {
@@ -477,6 +478,26 @@
 
   .pm-form__row {
     grid-template-columns: 1fr;
+  }
+
+  .pm-form__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pm-btn-ghost {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .pm-form__file-wrap {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pm-form__file-text,
+  .pm-form__file-btn {
+    white-space: normal;
   }
 
   .pm-header__slogan {

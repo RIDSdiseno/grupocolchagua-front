@@ -423,6 +423,12 @@
     padding-inline: 18px;
   }
 
+  .hp-hero__btn {
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
   .hp-hero__logo {
     width: 132px;
     margin-bottom: 26px;

@@ -143,7 +143,7 @@ function Layout({ children }: LayoutProps) {
                 rel="noreferrer"
                 className="footer-whatsapp"
               >
-                WhatsApp: +56 9 3932 6442
+                WhatsApp: +56 9 3231 6431
               </a>
             </div>
           </div>

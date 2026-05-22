@@ -162,7 +162,7 @@
 .contacto-info-box__inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 56px;
   align-items: stretch;
   max-width: 1180px;
@@ -708,6 +708,7 @@
 
   .home-button {
     width: 100%;
+    text-align: center;
   }
 
   .final-cta-card {

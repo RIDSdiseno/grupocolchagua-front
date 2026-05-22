@@ -237,6 +237,14 @@
   .denuncia-section {
     padding-top: 20px;
   }
+
+  .denuncia-actions {
+    display: grid;
+  }
+
+  .denuncia-btn {
+    width: 100%;
+  }
 }
 .datepicker-wrapper {
   position: relative;

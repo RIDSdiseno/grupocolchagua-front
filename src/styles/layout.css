@@ -21,10 +21,12 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 14px 20px;
+  width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 
 /* LOGO */
@@ -39,6 +41,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  min-width: 0;
 }
 
 .main-nav a,
@@ -47,6 +50,8 @@
   text-decoration: none;
   font-size: 14px;
   transition: 0.3s;
+  line-height: 1.25;
+  text-align: center;
 }
 
 .main-nav a:hover,
@@ -212,13 +217,25 @@ main {
 @media (max-width: 900px) {
   .header-container {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    padding-inline: 16px;
   }
 
   .main-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px 18px;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 2px 2px 8px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .main-nav a,
+  .nav-dropdown__trigger {
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
   .nav-dropdown {
@@ -255,8 +272,21 @@ main {
 }
 
 @media (max-width: 560px) {
+  .site-header {
+    position: sticky;
+  }
+
+  .header-container {
+    align-items: stretch;
+    padding: 10px 12px 6px;
+  }
+
+  .logo {
+    align-self: center;
+  }
+
   .main-nav {
-    gap: 10px 14px;
+    gap: 10px;
   }
 
   .main-nav a,
@@ -266,7 +296,7 @@ main {
 
   .nav-dropdown__menu {
     position: fixed;
-    top: 112px;
+    top: 96px;
     left: 16px;
     right: 16px;
     min-width: 0;
@@ -276,6 +306,17 @@ main {
   .nav-dropdown:hover .nav-dropdown__menu,
   .nav-dropdown:focus-within .nav-dropdown__menu {
     transform: translateY(0);
+  }
+
+  .whatsapp-float {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .whatsapp-float svg {
+    font-size: 26px;
   }
 }
 
@@ -315,7 +356,8 @@ main {
 .social-icons {
   display: flex;
   gap: 12px;
-  margin-left: 15px;
+  margin-left: 0;
+  flex: 0 0 auto;
 }
 
 .social-icons a {

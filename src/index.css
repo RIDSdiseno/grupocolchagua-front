@@ -60,6 +60,36 @@ body,
   box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+button,
+a {
+  overflow-wrap: anywhere;
+}
+
 h1,
 h2 {
   font-family: var(--heading);

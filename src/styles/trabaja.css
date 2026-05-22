@@ -60,6 +60,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-width: 0;
 }
 
 .floating-field {
@@ -362,14 +363,20 @@
 
   .trabaja-file-row {
     align-items: flex-start;
+    flex-direction: column;
   }
 
   .trabaja-actions {
     flex-wrap: wrap;
+    align-items: stretch;
   }
 
-  .trabaja-submit {
+  .trabaja-submit,
+  .trabaja-back-inline,
+  .trabaja-file-button,
+  .trabaja-file-remove {
     width: 100%;
+    text-align: center;
   }
 }
 

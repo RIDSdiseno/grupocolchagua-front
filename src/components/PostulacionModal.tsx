@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { enviarPostulacion } from "../services/postulaciones.service";
 import "../styles/postulacion-modal.css";
 
 interface Oferta {
@@ -18,6 +19,8 @@ interface Props {
 export default function PostulacionModal({ oferta, onClose }: Props) {
   const [paso, setPaso] = useState<1 | 2>(1);
   const [enviado, setEnviado] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({
     nombre: "",
     rut: "",
@@ -50,9 +53,66 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
     setForm((prev) => ({ ...prev, cv: e.target.files?.[0] ?? null }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setEnviado(true);
+    setSubmitError("");
+
+    const [nombre = "", ...apellidoParts] = form.nombre.trim().split(/\s+/);
+    const apellido = apellidoParts.join(" ").trim() || "Sin apellido";
+    const email = form.correo.trim();
+    const telefono = form.telefono.trim();
+    const cargoPostula = form.cargo.trim();
+
+    if (!nombre) {
+      setSubmitError("El nombre es requerido");
+      return;
+    }
+
+    if (!email) {
+      setSubmitError("El correo electrónico es requerido");
+      return;
+    }
+
+    if (!telefono) {
+      setSubmitError("El teléfono es requerido");
+      return;
+    }
+
+    if (!cargoPostula) {
+      setSubmitError("El cargo al que postula es requerido");
+      return;
+    }
+
+    if (!form.cv) {
+      setSubmitError("El CV es requerido");
+      return;
+    }
+
+    const postulacionFormData = new FormData();
+    postulacionFormData.append("nombre", nombre);
+    postulacionFormData.append("apellido", apellido);
+    postulacionFormData.append("rut", form.rut.trim());
+    postulacionFormData.append("email", email);
+    postulacionFormData.append("telefono", telefono);
+    postulacionFormData.append("cargoPostula", cargoPostula);
+    postulacionFormData.append("comuna", form.comuna.trim());
+    postulacionFormData.append("region", "");
+    postulacionFormData.append("experiencia", "");
+    postulacionFormData.append("disponibilidad", form.turno.trim());
+    postulacionFormData.append("mensaje", "");
+    postulacionFormData.append("cv", form.cv);
+
+    try {
+      setIsSubmitting(true);
+      await enviarPostulacion(postulacionFormData);
+      setEnviado(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "No se pudo enviar la postulación"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -227,22 +287,26 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
                     <input
                       className="pm-form__file-input"
                       type="file"
+                      name="cv"
                       accept=".pdf,.doc,.docx"
                       onChange={handleFile}
                     />
                   </div>
                 </label>
 
+                {submitError ? <p role="alert">{submitError}</p> : null}
+
                 <div className="pm-form__actions">
                   <button
                     type="button"
                     className="pm-btn-ghost"
                     onClick={() => setPaso(1)}
+                    disabled={isSubmitting}
                   >
                     ← Volver
                   </button>
-                  <button type="submit" className="pm-btn-primary">
-                    Enviar postulación
+                  <button type="submit" className="pm-btn-primary" disabled={isSubmitting}>
+                    {isSubmitting ? "Enviando..." : "Enviar postulación"}
                   </button>
                 </div>
 
@@ -255,7 +319,7 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
         {paso === 2 && enviado && (
           <div className="pm-body pm-body--success">
             <div className="pm-success-icon" aria-hidden="true">✓</div>
-            <h2 className="pm-title">¡Postulación enviada!</h2>
+            <h2 className="pm-title">Postulación enviada correctamente</h2>
             <p className="pm-sub">
               Hemos recibido tu información. Nuestro equipo de selección se
               pondrá en contacto contigo a la brevedad.

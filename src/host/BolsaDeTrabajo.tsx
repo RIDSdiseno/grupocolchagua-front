@@ -20,9 +20,20 @@ export default function BolsaDeTrabajo() {
   }, [iframeLoaded]);
 
   return (
-    <Layout>
+    <Layout hideWhatsappFloat>
       <section className="bolsa-page" aria-label="Bolsa de Trabajo">
         <div className="bolsa-embed-section">
+          <div className="bolsa-floating-action">
+            <a
+              className="bolsa-external-button"
+              href={COMPUTRABAJO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Postular en Computrabajo
+            </a>
+          </div>
+
           <div className="bolsa-embed-shell">
             {!showFallback && (
               <iframe
@@ -40,16 +51,15 @@ export default function BolsaDeTrabajo() {
                 <div className="bolsa-fallback__content">
                   <h2>Bolsa oficial de empleo</h2>
                   <p>
-                    Explora nuestras oportunidades laborales en nuestra bolsa
-                    oficial de empleo.
+                    Para postular, abre nuestra bolsa oficial en Computrabajo.
                   </p>
                   <a
                     className="bolsa-fallback__button"
                     href={COMPUTRABAJO_URL}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
-                    Ver ofertas laborales
+                    Postular en Computrabajo
                   </a>
                 </div>
               </div>

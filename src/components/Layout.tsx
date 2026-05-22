@@ -6,6 +6,7 @@ import { FaWhatsapp, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 type LayoutProps = {
   children: React.ReactNode;
+  hideWhatsappFloat?: boolean;
 };
 
 const SERVICE_LINKS = [
@@ -17,7 +18,7 @@ const SERVICE_LINKS = [
   { label: "Soluciones a tu medida", href: "/servicios/soluciones-a-tu-medida" },
 ];
 
-function Layout({ children }: LayoutProps) {
+function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
   return (
     <div className="site-wrapper">
       <header className="site-header">
@@ -169,15 +170,17 @@ function Layout({ children }: LayoutProps) {
         </div>
       </footer>
 
-      <a
-        href="https://wa.me/56932316431"
-        target="_blank"
-        rel="noreferrer"
-        className="whatsapp-float"
-        aria-label="Hablar por WhatsApp con Grupo Colchagua"
-      >
-        <FaWhatsapp />
-      </a>
+      {!hideWhatsappFloat && (
+        <a
+          href="https://wa.me/56932316431"
+          target="_blank"
+          rel="noreferrer"
+          className="whatsapp-float"
+          aria-label="Hablar por WhatsApp con Grupo Colchagua"
+        >
+          <FaWhatsapp />
+        </a>
+      )}
     </div>
   );
 }

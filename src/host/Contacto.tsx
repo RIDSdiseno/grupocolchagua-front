@@ -52,7 +52,7 @@ export default function Contacto() {
 
         <div className="contacto-content">
           <div className="contacto-actions">
-            <Link to="/trabaja" className="contacto-btn">
+            <Link to="/postulaciones" className="contacto-btn">
               TRABAJA CON NOSOTROS
             </Link>
 
@@ -193,7 +193,7 @@ export default function Contacto() {
                 Cotiza con nosotros
               </Link>
 
-              <Link to="/trabaja" className="home-button home-button--white">
+              <Link to="/postulaciones" className="home-button home-button--white">
                 Trabaja con nosotros
               </Link>
             </div>

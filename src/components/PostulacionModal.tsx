@@ -1,33 +1,35 @@
 import { useState, useEffect } from "react";
 import { enviarPostulacion } from "../services/postulaciones.service";
+import { type Empleo } from "../services/empleos.service";
 import "../styles/postulacion-modal.css";
 
-interface Oferta {
-  logo: string;
-  empresa: string;
-  tipo: string;
-  cargo: string;
-  turnos: string[];
-  comunas: string[];
+function formatRut(value: string): string {
+  const clean = value.replace(/[^0-9kK]/g, "").toUpperCase().slice(0, 9);
+  if (clean.length <= 1) return clean;
+  const body = clean.slice(0, -1);
+  const dv = clean.slice(-1);
+  const bodyWithDots = body.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return `${bodyWithDots}-${dv}`;
 }
 
 interface Props {
-  oferta: Oferta;
+  empleo: Empleo;
   onClose: () => void;
 }
 
-export default function PostulacionModal({ oferta, onClose }: Props) {
+export default function PostulacionModal({ empleo, onClose }: Props) {
   const [paso, setPaso] = useState<1 | 2>(1);
   const [enviado, setEnviado] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({
     nombre: "",
+    apellido: "",
     rut: "",
     telefono: "",
     correo: "",
     comuna: "",
-    cargo: oferta.cargo,
+    cargo: empleo.cargo ?? empleo.titulo,
     turno: "",
     cv: null as File | null,
   });
@@ -49,22 +51,43 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm((prev) => ({ ...prev, rut: formatRut(e.target.value) }));
+  };
+
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, cv: e.target.files?.[0] ?? null }));
   };
+
+  const formatFecha = (fecha: string) =>
+    new Date(fecha).toLocaleDateString("es-CL", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError("");
 
-    const [nombre = "", ...apellidoParts] = form.nombre.trim().split(/\s+/);
-    const apellido = apellidoParts.join(" ").trim() || "Sin apellido";
+    const nombre = form.nombre.trim();
+    const apellido = form.apellido.trim();
     const email = form.correo.trim();
     const telefono = form.telefono.trim();
     const cargoPostula = form.cargo.trim();
 
     if (!nombre) {
       setSubmitError("El nombre es requerido");
+      return;
+    }
+
+    if (!apellido) {
+      setSubmitError("El apellido es requerido");
+      return;
+    }
+
+    if (!form.rut.trim()) {
+      setSubmitError("El RUT es requerido");
       return;
     }
 
@@ -89,6 +112,7 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
     }
 
     const postulacionFormData = new FormData();
+    postulacionFormData.append("empleoId", String(empleo.id));
     postulacionFormData.append("nombre", nombre);
     postulacionFormData.append("apellido", apellido);
     postulacionFormData.append("rut", form.rut.trim());
@@ -119,15 +143,22 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
     if (e.target === e.currentTarget) onClose();
   };
 
+  const location = empleo.comuna ?? empleo.region ?? empleo.ubicacion;
+
   return (
     <div className="pm-backdrop" onClick={handleBackdropClick}>
-      <div className="pm-card" role="dialog" aria-modal="true" aria-label={`Postulación ${oferta.empresa}`}>
+      <div
+        className="pm-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Postulación ${empleo.empresa ?? empleo.titulo}`}
+      >
 
         <button className="pm-close" onClick={onClose} aria-label="Cerrar modal">
           ✕
         </button>
 
-        {/* ── PASO 1: Landing ── */}
+        {/* ── PASO 1: Detalle oferta ── */}
         {paso === 1 && (
           <>
             <div className="pm-header">
@@ -139,18 +170,45 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
             </div>
 
             <div className="pm-body">
-              <div className="pm-logo-wrap">
-                <img src={oferta.logo} alt={oferta.empresa} className="pm-logo" />
-              </div>
               <h2 className="pm-title">
-                {oferta.empresa.toUpperCase()} – POSTULACIÓN
+                {(empleo.empresa ?? empleo.titulo).toUpperCase()} – POSTULACIÓN
               </h2>
-              <p className="pm-sub">
-                Te invitamos a ser parte de esta nueva oportunidad laboral
-              </p>
+              <p className="pm-sub">{empleo.titulo}</p>
               <div className="pm-pills">
-                <span className="pm-pill">{oferta.tipo}</span>
-                <span className="pm-pill pm-pill--cargo">{oferta.cargo}</span>
+                {empleo.modalidad && <span className="pm-pill">{empleo.modalidad}</span>}
+                {empleo.jornada && <span className="pm-pill pm-pill--cargo">{empleo.jornada}</span>}
+              </div>
+              {empleo.descripcion && (
+                <p className="pm-sub" style={{ textAlign: "left", marginTop: "12px", fontSize: "13px" }}>
+                  {empleo.descripcion}
+                </p>
+              )}
+              {empleo.requisitos && (
+                <div style={{ textAlign: "left", marginTop: "10px" }}>
+                  <strong style={{ fontSize: "13px", color: "#333" }}>Requisitos:</strong>
+                  <p className="pm-sub" style={{ textAlign: "left", marginTop: "4px", fontSize: "13px" }}>
+                    {empleo.requisitos}
+                  </p>
+                </div>
+              )}
+              {empleo.beneficios && (
+                <div style={{ textAlign: "left", marginTop: "10px" }}>
+                  <strong style={{ fontSize: "13px", color: "#333" }}>Beneficios:</strong>
+                  <p className="pm-sub" style={{ textAlign: "left", marginTop: "4px", fontSize: "13px" }}>
+                    {empleo.beneficios}
+                  </p>
+                </div>
+              )}
+              <div className="pm-pills" style={{ marginTop: "12px" }}>
+                {location && <span className="pm-pill">{location}</span>}
+                {empleo.vacantes != null && (
+                  <span className="pm-pill">
+                    {empleo.vacantes} vacante{empleo.vacantes !== 1 ? "s" : ""}
+                  </span>
+                )}
+                {empleo.fechaCierre && (
+                  <span className="pm-pill">Cierra: {formatFecha(empleo.fechaCierre)}</span>
+                )}
               </div>
               <button className="pm-btn-primary" onClick={() => setPaso(2)}>
                 Empezar ahora
@@ -166,10 +224,7 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
               <div className="pm-header__deco" aria-hidden="true" />
               <div className="pm-header__content">
                 <div className="pm-header__logo-row">
-                  <div className="pm-header__logo-wrap">
-                    <img src={oferta.logo} alt={oferta.empresa} />
-                  </div>
-                  <span className="pm-header__empresa">{oferta.empresa}</span>
+                  <span className="pm-header__empresa">{empleo.empresa ?? empleo.titulo}</span>
                 </div>
                 <p className="pm-header__slogan pm-header__slogan--sm">
                   Formulario de postulación
@@ -183,17 +238,32 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
 
                 <div className="pm-form__row">
                   <label className="pm-form__label">
-                    Nombre completo
+                    Nombre
                     <input
                       className="pm-form__input"
                       type="text"
                       name="nombre"
                       value={form.nombre}
                       onChange={handleChange}
-                      placeholder="Ej: Juan Pérez"
+                      placeholder="Ej: Juan"
                       required
                     />
                   </label>
+                  <label className="pm-form__label">
+                    Apellido
+                    <input
+                      className="pm-form__input"
+                      type="text"
+                      name="apellido"
+                      value={form.apellido}
+                      onChange={handleChange}
+                      placeholder="Ej: Pérez"
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="pm-form__row">
                   <label className="pm-form__label">
                     RUT
                     <input
@@ -201,14 +271,11 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
                       type="text"
                       name="rut"
                       value={form.rut}
-                      onChange={handleChange}
+                      onChange={handleRutChange}
                       placeholder="12.345.678-9"
                       required
                     />
                   </label>
-                </div>
-
-                <div className="pm-form__row">
                   <label className="pm-form__label">
                     Teléfono
                     <input
@@ -221,6 +288,9 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
                       required
                     />
                   </label>
+                </div>
+
+                <div className="pm-form__row">
                   <label className="pm-form__label">
                     Correo electrónico
                     <input
@@ -233,37 +303,31 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
                       required
                     />
                   </label>
-                </div>
-
-                <div className="pm-form__row">
                   <label className="pm-form__label">
-                    Comuna
+                    Comuna de residencia
                     <input
                       className="pm-form__input"
                       type="text"
                       name="comuna"
                       value={form.comuna}
                       onChange={handleChange}
-                      placeholder="Ej: Santiago"
+                      placeholder="Ej: Providencia"
                       required
                     />
                   </label>
-                  <label className="pm-form__label">
-                    Turno disponible
-                    <select
-                      className="pm-form__input pm-form__select"
-                      name="turno"
-                      value={form.turno}
-                      onChange={handleChange}
-                      required
-                    >
-                      <option value="">Seleccionar turno</option>
-                      {oferta.turnos.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                  </label>
                 </div>
+
+                <label className="pm-form__label pm-form__label--full">
+                  Disponibilidad
+                  <input
+                    className="pm-form__input"
+                    type="text"
+                    name="turno"
+                    value={form.turno}
+                    onChange={handleChange}
+                    placeholder="Ej: Inmediata, desde el lunes, turnos rotativos"
+                  />
+                </label>
 
                 <label className="pm-form__label pm-form__label--full">
                   Cargo al que postula
@@ -272,8 +336,8 @@ export default function PostulacionModal({ oferta, onClose }: Props) {
                     type="text"
                     name="cargo"
                     value={form.cargo}
-                    onChange={handleChange}
-                    required
+                    readOnly
+                    style={{ background: "#f5f5f5", cursor: "default" }}
                   />
                 </label>
 

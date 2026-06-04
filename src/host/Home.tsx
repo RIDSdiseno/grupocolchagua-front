@@ -238,7 +238,7 @@ export default function Home() {
                   Cotiza con nosotros
                 </Link>
 
-                <Link to="/trabaja" className="home-button home-button--secondary">
+                <Link to="/postulaciones" className="home-button home-button--secondary">
                   Trabaja con nosotros
                 </Link>
               </div>
@@ -364,7 +364,7 @@ export default function Home() {
                   Cotiza con nosotros
                 </Link>
 
-                <Link to="/trabaja" className="home-button home-button--white">
+                <Link to="/postulaciones" className="home-button home-button--white">
                   Trabaja con nosotros
                 </Link>
               </div>

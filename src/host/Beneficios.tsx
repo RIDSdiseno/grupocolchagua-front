@@ -85,7 +85,7 @@ export default function Beneficios() {
             <h1 className="beneficios-title">BENEFICIOS</h1>
 
             <div className="beneficios-actions">
-              <Link to="/trabaja" className="beneficios-btn">
+              <Link to="/postulaciones" className="beneficios-btn">
                 TRABAJA CON NOSOTROS
               </Link>
 
@@ -215,7 +215,7 @@ export default function Beneficios() {
                   Cotiza con nosotros
                 </Link>
 
-                <Link to="/trabaja" className="home-button home-button--white">
+                <Link to="/postulaciones" className="home-button home-button--white">
                   Trabaja con nosotros
                 </Link>
               </div>

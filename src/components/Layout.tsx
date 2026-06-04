@@ -18,6 +18,11 @@ const SERVICE_LINKS = [
   { label: "Soluciones a tu medida", href: "/servicios/soluciones-a-tu-medida" },
 ];
 
+const BOLSA_LINKS = [
+  { label: "Bolsa de Trabajo", href: "/bolsa-de-trabajo" },
+  { label: "Postularse", href: "/postulaciones" },
+];
+
 function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
   return (
     <div className="site-wrapper">
@@ -45,7 +50,18 @@ function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
               </div>
             </div>
 
-            <NavLink to="/bolsa-de-trabajo">Bolsa de Trabajo</NavLink>
+            <div className="nav-dropdown">
+              <NavLink to="/bolsa-de-trabajo" className="nav-dropdown__trigger">
+                Bolsa de Trabajo
+              </NavLink>
+              <div className="nav-dropdown__menu" aria-label="Bolsa de Trabajo">
+                {BOLSA_LINKS.map((item) => (
+                  <Link key={item.href} to={item.href}>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
             <NavLink to="/nosotros">Nosotros</NavLink>
             <NavLink to="/contacto">Contacto</NavLink>
             <a

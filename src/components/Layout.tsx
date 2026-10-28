@@ -1,5 +1,6 @@
 import "../styles/layout.css";
 import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
 import logo from "../assets/logo/logo-colchagua.png";
 import logoFooter from "../assets/logo/logo-colchagua-2.png";
 import { FaWhatsapp, FaLinkedinIn, FaInstagram } from "react-icons/fa";
@@ -24,26 +25,38 @@ const BOLSA_LINKS = [
 ];
 
 function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const close = () => setMenuOpen(false);
+
   return (
     <div className="site-wrapper">
       <header className="site-header">
         <div className="header-container">
           <div className="logo">
-            <Link to="/">
+            <Link to="/" onClick={close}>
               <img src={logo} alt="Grupo Colchagua" />
             </Link>
           </div>
 
-          <nav className="main-nav" aria-label="Navegación principal">
-            <NavLink to="/">Home</NavLink>
+          <button
+            className={`nav-hamburger${menuOpen ? " is-open" : ""}`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
+
+          <nav className={`main-nav${menuOpen ? " menu-open" : ""}`} aria-label="Navegación principal">
+            <NavLink to="/" onClick={close}>Home</NavLink>
 
             <div className="nav-dropdown">
-              <NavLink to="/servicios" className="nav-dropdown__trigger">
+              <NavLink to="/servicios" className="nav-dropdown__trigger" onClick={close}>
                 Servicios
               </NavLink>
               <div className="nav-dropdown__menu" aria-label="Servicios">
                 {SERVICE_LINKS.map((service) => (
-                  <Link key={service.href} to={service.href}>
+                  <Link key={service.href} to={service.href} onClick={close}>
                     {service.label}
                   </Link>
                 ))}
@@ -51,23 +64,25 @@ function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
             </div>
 
             <div className="nav-dropdown">
-              <NavLink to="/bolsa-de-trabajo" className="nav-dropdown__trigger">
+              <NavLink to="/bolsa-de-trabajo" className="nav-dropdown__trigger" onClick={close}>
                 Bolsa de Trabajo
               </NavLink>
               <div className="nav-dropdown__menu" aria-label="Bolsa de Trabajo">
                 {BOLSA_LINKS.map((item) => (
-                  <Link key={item.href} to={item.href}>
+                  <Link key={item.href} to={item.href} onClick={close}>
                     {item.label}
                   </Link>
                 ))}
               </div>
             </div>
-            <NavLink to="/nosotros">Nosotros</NavLink>
-            <NavLink to="/contacto">Contacto</NavLink>
+
+            <NavLink to="/nosotros" onClick={close}>Nosotros</NavLink>
+            <NavLink to="/contacto" onClick={close}>Contacto</NavLink>
             <a
               href="https://talana.com/es/remuneraciones/login-vue?next=/es/remuneraciones/#/"
               target="_blank"
               rel="noreferrer"
+              onClick={close}
             >
               Ir a Talana
             </a>
@@ -155,12 +170,12 @@ function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
                 contacto@grupocolchagua.cl
               </a>
               <a
-                href="https://wa.me/56932316431"
+                href="https://wa.me/56939326442"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-whatsapp"
               >
-                WhatsApp: +56 9 3231 6431
+                WhatsApp: +56 9 3932 6442
               </a>
             </div>
           </div>
@@ -188,7 +203,7 @@ function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
 
       {!hideWhatsappFloat && (
         <a
-          href="https://wa.me/56932316431"
+          href="https://wa.me/56939326442"
           target="_blank"
           rel="noreferrer"
           className="whatsapp-float"

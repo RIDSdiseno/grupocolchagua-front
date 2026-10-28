@@ -2,6 +2,9 @@ import { useState, type ChangeEvent, type FocusEvent, type FormEvent } from "rea
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/cotizar.css";
+import { enviarCotizacion } from "../services/contacto.service";
+
+type FormStatus = "idle" | "sending" | "success" | "error";
 
 function cleanRut(value: string) {
   return value.replace(/[^0-9kK]/g, "").toUpperCase();
@@ -63,6 +66,8 @@ function isValidRut(value: string) {
 export default function Cotizar() {
   const [rut, setRut] = useState("");
   const [rutError, setRutError] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleRutChange = (event: ChangeEvent<HTMLInputElement>) => {
     const formattedValue = formatRut(event.target.value);
@@ -82,11 +87,33 @@ export default function Cotizar() {
     setRutError(isValidRut(nextRut) ? "" : "Ingresa un RUT de empresa válido.");
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (cleanRut(rut) && !isValidRut(rut)) {
       setRutError("Ingresa un RUT de empresa válido.");
+      return;
+    }
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setStatus("sending");
+    setErrorMsg("");
+
+    try {
+      await enviarCotizacion({
+        companyName: data.get("companyName") as string,
+        rut: rut || undefined,
+        email: data.get("email") as string,
+        message: (data.get("message") as string) || undefined,
+      });
+      setStatus("success");
+      form.reset();
+      setRut("");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Error al enviar la cotización.");
     }
   };
 
@@ -103,7 +130,12 @@ export default function Cotizar() {
             </p>
           </div>
 
-          <form className="cotizar-form" onSubmit={handleSubmit}>
+          {status === "success" && (
+            <div className="cotizar-success" role="status">
+              <strong>¡Cotización enviada!</strong> Te contactaremos a la brevedad.
+            </div>
+          )}
+          <form className="cotizar-form" onSubmit={handleSubmit} noValidate>
             <div className="form-row">
               <div className="form-field">
                 <input
@@ -161,9 +193,19 @@ export default function Cotizar() {
               </div>
             </div>
 
+              {status === "error" && (
+                <div className="form-row">
+                  <p className="field-error" role="alert">{errorMsg}</p>
+                </div>
+              )}
+
             <div className="cotizar-actions">
-              <button type="submit" className="cotizar-submit">
-                Enviar
+              <button
+                type="submit"
+                className="cotizar-submit"
+                disabled={status === "sending"}
+              >
+                {status === "sending" ? "Enviando…" : "Enviar"}
               </button>
 
               <Link to="/" className="cotizar-back-inline">

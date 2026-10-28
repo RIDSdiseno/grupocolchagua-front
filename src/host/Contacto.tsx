@@ -1,7 +1,9 @@
+import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/contacto.css";
 import ContactQuick from "../components/ContactQuick";
+import { enviarContacto } from "../services/contacto.service";
 
 import heroContacto from "../assets/logo/fondo_pagina_contacto.png";
 import alvi from "../assets/marcas/logo_alvi-150x150.png";
@@ -38,8 +40,55 @@ const BRANDS = [
   xiaomi,
 ];
 
+const SERVICIOS = [
+  "Servicios Transitorios",
+  "Outsourcing",
+  "Reclutamiento y Selección",
+  "Formación y Capacitación",
+  "Payroll",
+  "Reposición Multimarca",
+];
+
+type FormStatus = "idle" | "sending" | "success" | "error";
+
 export default function Contacto() {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus("sending");
+    setErrorMsg("");
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      await enviarContacto({
+        nombre: data.get("nombre") as string,
+        empresa: (data.get("empresa") as string) || undefined,
+        email: data.get("email") as string,
+        telefono: (data.get("telefono") as string) || undefined,
+        servicio: (data.get("servicio") as string) || undefined,
+        mensaje: data.get("mensaje") as string,
+      });
+      setStatus("success");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Error al enviar el mensaje.");
+    }
+  };
+
   return (
+    <>
+      <title>Contacto | Grupo Colchagua y Grupo Santa Cruz</title>
+      <meta name="description" content="Contáctanos para cotizar servicios transitorios, outsourcing, reclutamiento y selección o formación y capacitación para tu empresa." />
+      <meta property="og:title" content="Contacto | Grupo Colchagua y Grupo Santa Cruz" />
+      <meta property="og:description" content="Contáctanos para cotizar servicios transitorios, outsourcing, reclutamiento y selección o formación y capacitación para tu empresa." />
+      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
     <Layout>
       <section className="contacto-hero">
         <img
@@ -51,6 +100,7 @@ export default function Contacto() {
         <div className="contacto-overlay" />
 
         <div className="contacto-content">
+          <h1 className="contacto-hero-title">CONTÁCTANOS</h1>
           <div className="contacto-actions">
             <Link to="/postulaciones" className="contacto-btn">
               TRABAJA CON NOSOTROS
@@ -201,6 +251,109 @@ export default function Contacto() {
           </div>
         </div>
       </section>
+
+      <section className="contacto-form-section section-spacing">
+        <div className="home-container">
+          <div className="contacto-form-header">
+            <span className="section-kicker">Escríbenos</span>
+            <h2 className="section-title">Envíanos tu consulta</h2>
+            <p className="contacto-form-lead">
+              Completa el formulario y te responderemos a la brevedad.
+            </p>
+          </div>
+
+          {status === "success" ? (
+            <div className="contacto-form-success" role="status">
+              <strong>¡Mensaje enviado!</strong> Nos contactaremos contigo pronto.
+            </div>
+          ) : (
+            <form className="cotizar-form contacto-form" onSubmit={handleSubmit} noValidate>
+              <div className="form-row">
+                <div className="form-field">
+                  <input
+                    type="text"
+                    name="nombre"
+                    placeholder="Nombre *"
+                    aria-label="Nombre"
+                    required
+                  />
+                </div>
+                <div className="form-field">
+                  <input
+                    type="text"
+                    name="empresa"
+                    placeholder="Empresa"
+                    aria-label="Empresa"
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-field">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email *"
+                    aria-label="Email"
+                    required
+                  />
+                </div>
+                <div className="form-field">
+                  <input
+                    type="tel"
+                    name="telefono"
+                    placeholder="Teléfono"
+                    aria-label="Teléfono"
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-field">
+                  <select name="servicio" aria-label="Servicio de interés" className="contacto-select">
+                    <option value="">Servicio de interés</option>
+                    {SERVICIOS.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-field">
+                  <textarea
+                    name="mensaje"
+                    placeholder="Mensaje *"
+                    aria-label="Mensaje"
+                    rows={3}
+                    required
+                    onInput={(e) => {
+                      const t = e.target as HTMLTextAreaElement;
+                      t.style.height = "auto";
+                      t.style.height = t.scrollHeight + "px";
+                    }}
+                  />
+                </div>
+              </div>
+
+              {status === "error" && (
+                <p className="field-error" role="alert">{errorMsg}</p>
+              )}
+
+              <div className="cotizar-actions">
+                <button
+                  type="submit"
+                  className="cotizar-submit"
+                  disabled={status === "sending"}
+                >
+                  {status === "sending" ? "Enviando…" : "Enviar mensaje"}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </section>
     </Layout>
+    </>
   );
 }

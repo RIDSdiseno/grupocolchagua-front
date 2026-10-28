@@ -212,47 +212,135 @@ main {
   transform: scale(1.1);
 }
 
+/* ================= HAMBURGER ================= */
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+  transform-origin: center;
+}
+
+.nav-hamburger.is-open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.nav-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 900px) {
+@media (max-width: 860px) {
+  /* Header: logo + hamburger en una fila */
   .header-container {
-    flex-direction: column;
-    gap: 12px;
-    padding-inline: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    padding: 12px 18px;
   }
 
+  .logo {
+    flex: 1 0 auto;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  /* Nav colapsado por defecto */
   .main-nav {
-    width: 100%;
+    display: none;
+    flex: 0 0 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .main-nav.menu-open {
+    display: flex;
+  }
+
+  /* Links del menú mobile */
+  .main-nav > a,
+  .main-nav .nav-dropdown__trigger {
+    display: block;
+    padding: 13px 0;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: normal;
+    text-align: left;
+  }
+
+  .main-nav .social-icons {
+    padding: 14px 0 4px;
+    gap: 16px;
     justify-content: flex-start;
-    gap: 12px;
-    overflow-x: auto;
-    overflow-y: visible;
-    padding: 2px 2px 8px;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
   }
 
-  .main-nav a,
-  .nav-dropdown__trigger {
-    flex: 0 0 auto;
-    white-space: nowrap;
+  /* Dropdowns expandidos inline en mobile */
+  .main-nav .nav-dropdown {
+    display: block;
+    position: static;
   }
 
-  .nav-dropdown {
-    position: relative;
+  .main-nav .nav-dropdown__trigger::after {
+    display: none;
   }
 
-  .nav-dropdown__menu {
-    left: 50%;
-    top: 100%;
-    transform: translate(-50%, 8px);
+  .main-nav .nav-dropdown__menu {
+    position: static;
+    display: flex !important;
+    flex-direction: column;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    border: none;
+    box-shadow: none;
+    margin: 4px 0 8px 12px;
+    padding: 4px 0;
   }
 
-  .nav-dropdown:hover .nav-dropdown__menu,
-  .nav-dropdown:focus-within .nav-dropdown__menu {
-    transform: translate(-50%, 0);
+  .main-nav .nav-dropdown__menu a {
+    color: rgba(255, 255, 255, 0.88);
+    padding: 10px 16px;
+    font-size: 14px;
+    border-bottom: none;
   }
 
+  .main-nav .nav-dropdown__menu a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 1;
+    color: #ffffff;
+  }
+
+  /* Footer */
   .footer-container {
     grid-template-columns: 1fr;
     text-align: center;
@@ -268,44 +356,6 @@ main {
 
   .footer-social {
     justify-content: center;
-  }
-}
-
-@media (max-width: 560px) {
-  .site-header {
-    position: sticky;
-  }
-
-  .header-container {
-    align-items: stretch;
-    padding: 10px 12px 6px;
-  }
-
-  .logo {
-    align-self: center;
-  }
-
-  .main-nav {
-    gap: 10px;
-  }
-
-  .main-nav a,
-  .nav-dropdown__trigger {
-    font-size: 13px;
-  }
-
-  .nav-dropdown__menu {
-    position: fixed;
-    top: 96px;
-    left: 16px;
-    right: 16px;
-    min-width: 0;
-    transform: translateY(8px);
-  }
-
-  .nav-dropdown:hover .nav-dropdown__menu,
-  .nav-dropdown:focus-within .nav-dropdown__menu {
-    transform: translateY(0);
   }
 
   .whatsapp-float {

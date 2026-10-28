@@ -29,23 +29,31 @@ const SERVICES = [
       "Apoyamos necesidades temporales de dotación para cubrir reemplazos, temporadas altas y proyectos específicos.",
   },
   {
-    id: "formacion",
-    path: "/servicios/formacion-capacitacion",
+    id: "formacion-y-capacitacion",
+    path: "/servicios/formacion-y-capacitacion",
     image: trainingImage,
     title: "Formación y Capacitación",
     description:
       "Fortalecemos competencias laborales con programas orientados a desempeño, seguridad y mejora continua.",
   },
   {
-    id: "reclutamiento",
-    path: "/servicios/reclutamiento-seleccion",
+    id: "reclutamiento-y-seleccion",
+    path: "/servicios/reclutamiento-y-seleccion",
     image: recruitingImage,
     title: "Reclutamiento y Selección",
     description:
       "Buscamos y evaluamos talento alineado al cargo, la cultura y las necesidades de cada empresa.",
   },
   {
-    id: "reposicion",
+    id: "payroll",
+    path: "/servicios/payroll",
+    image: customSolutionsImage,
+    title: "Payroll y Remuneraciones",
+    description:
+      "Externalizamos el cálculo y pago de remuneraciones con orden, cumplimiento y tranquilidad para tu equipo.",
+  },
+  {
+    id: "reposicion-multimarca",
     path: "/servicios/reposicion-multimarca",
     image: repositionImage,
     title: "Reposición Multimarca",
@@ -53,7 +61,7 @@ const SERVICES = [
       "Apoyamos la continuidad comercial en salas de venta con equipos coordinados y seguimiento operativo.",
   },
   {
-    id: "soluciones",
+    id: "soluciones-a-tu-medida",
     path: "/servicios/soluciones-a-tu-medida",
     image: customSolutionsImage,
     title: "Soluciones a tu medida",
@@ -71,6 +79,14 @@ const STATS = [
 
 export default function Servicios() {
   return (
+    <>
+      <title>Servicios Transitorios y Outsourcing | Grupo Colchagua y Grupo Santa Cruz</title>
+      <meta name="description" content="Conoce nuestros servicios: personal transitorio, outsourcing gerencial, administrativo y operativo, reclutamiento y selección, formación y capacitación, payroll y reposición multimarca." />
+      <meta property="og:title" content="Servicios Transitorios y Outsourcing | Grupo Colchagua y Grupo Santa Cruz" />
+      <meta property="og:description" content="Conoce nuestros servicios: personal transitorio, outsourcing gerencial, administrativo y operativo, reclutamiento y selección, formación y capacitación, payroll y reposición multimarca." />
+      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
     <Layout>
       <div className="servicios-page">
         <section className="servicios-hero servicios-hero--static">
@@ -169,5 +185,6 @@ export default function Servicios() {
         </section>
       </div>
     </Layout>
+    </>
   );
 }

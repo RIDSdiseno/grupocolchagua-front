@@ -14,6 +14,8 @@ type ServicioConfig = {
   descripcion: string;
   image: string;
   beneficios: string[];
+  seoTitle: string;
+  seoDesc: string;
 };
 
 const SERVICIOS: Record<string, ServicioConfig> = {
@@ -27,6 +29,8 @@ const SERVICIOS: Record<string, ServicioConfig> = {
       "Continuidad para procesos clave del negocio.",
       "Seguimiento y coordinación permanente del servicio.",
     ],
+    seoTitle: "Outsourcing de Personal en Chile | Grupo Santa Cruz",
+    seoDesc: "Outsourcing gerencial, administrativo y operativo para que tu empresa se enfoque en su negocio. Más de 10 años de trayectoria. Cotiza con Grupo Santa Cruz.",
   },
   "servicios-transitorios": {
     titulo: "Servicios Transitorios",
@@ -38,8 +42,10 @@ const SERVICIOS: Record<string, ServicioConfig> = {
       "Apoyo en reemplazos, temporadas altas y contingencias.",
       "Dotación alineada a los requerimientos de cada operación.",
     ],
+    seoTitle: "Servicios Transitorios en Chile | Grupo Colchagua",
+    seoDesc: "Personal transitorio para cubrir peaks de demanda, reemplazos y proyectos. Más de 10 años y 350 empresas clientes en todo Chile. Cotiza con Grupo Colchagua.",
   },
-  "formacion-capacitacion": {
+  "formacion-y-capacitacion": {
     titulo: "Formación y Capacitación",
     descripcion:
       "Diseñamos programas de capacitación orientados al desarrollo de competencias laborales y mejora del desempeño de los equipos.",
@@ -49,8 +55,10 @@ const SERVICIOS: Record<string, ServicioConfig> = {
       "Desarrollo de competencias para equipos operativos.",
       "Enfoque en desempeño, seguridad y mejora continua.",
     ],
+    seoTitle: "Formación y Capacitación Laboral | Grupo Colchagua",
+    seoDesc: "Programas de formación y capacitación para equipos operativos y administrativos, alineados a las necesidades de cada empresa cliente. Conoce cómo trabajamos.",
   },
-  "reclutamiento-seleccion": {
+  "reclutamiento-y-seleccion": {
     titulo: "Reclutamiento y Selección",
     descripcion:
       "Acompañamos a las empresas en la búsqueda, evaluación y selección de talento adecuado para sus necesidades operativas y estratégicas.",
@@ -60,6 +68,21 @@ const SERVICIOS: Record<string, ServicioConfig> = {
       "Evaluación de candidatos según requerimientos del cliente.",
       "Acompañamiento durante el proceso de selección.",
     ],
+    seoTitle: "Reclutamiento y Selección de Personal | Grupo Colchagua",
+    seoDesc: "Encontramos a las personas que tu empresa necesita, desde cargos administrativos hasta operaciones y logística. Procesos ágiles y con respaldo. Conversemos.",
+  },
+  payroll: {
+    titulo: "Payroll y Remuneraciones",
+    descripcion:
+      "Externalizamos el cálculo y pago de remuneraciones con un equipo especializado, asegurando orden, cumplimiento y tranquilidad para tu área de personas.",
+    image: customSolutionsImage,
+    beneficios: [
+      "Cálculo preciso y oportuno de remuneraciones.",
+      "Cumplimiento de obligaciones laborales y previsionales.",
+      "Liberación de carga administrativa para el área de personas.",
+    ],
+    seoTitle: "Payroll y Gestión de Remuneraciones | Grupo Colchagua",
+    seoDesc: "Externaliza el cálculo y pago de remuneraciones con un equipo especializado. Orden, cumplimiento y tranquilidad para tu área de personas. Cotiza aquí.",
   },
   "reposicion-multimarca": {
     titulo: "Reposición Multimarca",
@@ -71,6 +94,8 @@ const SERVICIOS: Record<string, ServicioConfig> = {
       "Apoyo en disponibilidad y exhibición de productos.",
       "Coordinación de equipos en terreno.",
     ],
+    seoTitle: "Reposición Multimarca en Retail | Grupo Colchagua",
+    seoDesc: "Personal de reposición en punto de venta para una o varias marcas, para que tus productos estén siempre disponibles y bien exhibidos. Cotiza con nosotros.",
   },
   "soluciones-a-tu-medida": {
     titulo: "Soluciones a tu medida",
@@ -82,6 +107,8 @@ const SERVICIOS: Record<string, ServicioConfig> = {
       "Flexibilidad para operaciones de distinta escala.",
       "Acompañamiento para definir la solución más adecuada.",
     ],
+    seoTitle: "Soluciones a tu Medida | Grupo Colchagua",
+    seoDesc: "Diseñamos soluciones flexibles de personal según los requerimientos específicos de cada empresa. Adaptadas a tu operación y objetivos. Conversemos.",
   },
 };
 
@@ -94,6 +121,12 @@ export default function ServicioDetalle() {
   }
 
   return (
+    <>
+      <title>{servicio.seoTitle}</title>
+      <meta name="description" content={servicio.seoDesc} />
+      <meta property="og:title" content={servicio.seoTitle} />
+      <meta property="og:description" content={servicio.seoDesc} />
+      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
     <Layout>
       <div className="servicios-page servicio-detalle-page">
         <section className="servicio-detalle-hero">
@@ -160,5 +193,6 @@ export default function ServicioDetalle() {
         </section>
       </div>
     </Layout>
+    </>
   );
 }

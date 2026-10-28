@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/home.css";
 import ContactQuick from "../components/ContactQuick";
-import PromoPostulacionesModal from "../components/PromoPostulacionesModal";
 
 import heroImage from "../assets/inicio/almacenamiento.png";
 import outsourcingImage from "../assets/nuestrosservicios/serviciosout.png";
@@ -39,26 +38,32 @@ const SERVICES = [
   {
     image: outsourcingImage,
     title: "Servicios Outsourcing",
+    slug: "outsourcing",
   },
   {
     image: heroImage,
     title: "Servicios Transitorios",
+    slug: "servicios-transitorios",
   },
   {
     image: trainingImage,
     title: "Formación y Capacitación",
+    slug: "formacion-y-capacitacion",
   },
   {
     image: recruitingImage,
     title: "Reclutamiento y Selección",
+    slug: "reclutamiento-y-seleccion",
   },
   {
     image: transitoryImage,
     title: "Reposición Multimarca",
+    slug: "reposicion-multimarca",
   },
   {
     image: customSolutionsImage,
     title: "Soluciones a tu medida",
+    slug: "soluciones-a-tu-medida",
   },
 ];
 
@@ -211,8 +216,15 @@ export default function Home() {
   );
 
   return (
-    <Layout>
-      <PromoPostulacionesModal />
+    <>
+      <title>Grupo Colchagua y Grupo Santa Cruz | Servicios Transitorios y Outsourcing en Chile</title>
+      <meta name="description" content="Dos especialidades, un mismo aliado. Grupo Colchagua (servicios transitorios) y Grupo Santa Cruz (outsourcing) llevan más de 10 años entregando soluciones de personal a empresas en todo Chile." />
+      <meta property="og:title" content="Grupo Colchagua y Grupo Santa Cruz | Servicios Transitorios y Outsourcing en Chile" />
+      <meta property="og:description" content="Dos especialidades, un mismo aliado. Grupo Colchagua (servicios transitorios) y Grupo Santa Cruz (outsourcing) llevan más de 10 años entregando soluciones de personal a empresas en todo Chile." />
+      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <Layout>
       <div className="home">
         <section
           className="hero"
@@ -256,7 +268,7 @@ export default function Home() {
               {SERVICES.map((service) => (
                 <Link
                   key={service.title}
-                  to="/servicios"
+                  to={`/servicios/${service.slug}`}
                   className="service-card"
                 >
                   <div className="service-card__image-wrap">
@@ -374,5 +386,6 @@ export default function Home() {
         </section>
       </div>
     </Layout>
+    </>
   );
 }

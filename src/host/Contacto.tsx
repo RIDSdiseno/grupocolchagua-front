@@ -21,6 +21,7 @@ import starken from "../assets/marcas/logo_starken-3-150x150.png";
 import vinaundurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
 import walmart from "../assets/marcas/logo_walmart.png";
 import xiaomi from "../assets/marcas/logo_xiaomi-150x150.png";
+import { useSeo } from "../hooks/useSeo";
 
 const BRANDS = [
   santaisabel,
@@ -80,15 +81,12 @@ export default function Contacto() {
     }
   };
 
+  useSeo(
+    "Contacto | Grupo Colchagua y Grupo Santa Cruz",
+    "Contáctanos para cotizar servicios transitorios, outsourcing, reclutamiento y selección o formación y capacitación para tu empresa."
+  );
+
   return (
-    <>
-      <title>Contacto | Grupo Colchagua y Grupo Santa Cruz</title>
-      <meta name="description" content="Contáctanos para cotizar servicios transitorios, outsourcing, reclutamiento y selección o formación y capacitación para tu empresa." />
-      <meta property="og:title" content="Contacto | Grupo Colchagua y Grupo Santa Cruz" />
-      <meta property="og:description" content="Contáctanos para cotizar servicios transitorios, outsourcing, reclutamiento y selección o formación y capacitación para tu empresa." />
-      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
     <Layout>
       <section className="contacto-hero">
         <img
@@ -354,6 +352,5 @@ export default function Contacto() {
         </div>
       </section>
     </Layout>
-    </>
   );
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import logo from "../assets/logo/logo-colchagua.png";
 import logoFooter from "../assets/logo/logo-colchagua-2.png";
 import { FaWhatsapp, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { useAjustesWeb } from "../hooks/useAjustesWeb";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -27,6 +28,8 @@ const BOLSA_LINKS = [
 function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const close = () => setMenuOpen(false);
+  const ajustes = useAjustesWeb();
+  const blogVisible = ajustes?.blogVisible === true;
 
   return (
     <div className="site-wrapper">
@@ -77,6 +80,9 @@ function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
             </div>
 
             <NavLink to="/nosotros" onClick={close}>Nosotros</NavLink>
+            {blogVisible && (
+              <NavLink to="/blog" onClick={close}>Blog</NavLink>
+            )}
             <NavLink to="/contacto" onClick={close}>Contacto</NavLink>
             <a
               href="https://talana.com/es/remuneraciones/login-vue?next=/es/remuneraciones/#/"
@@ -131,6 +137,11 @@ function Layout({ children, hideWhatsappFloat = false }: LayoutProps) {
               <Link to="/bolsa-de-trabajo" className="footer-link">
                 Bolsa de Trabajo
               </Link>
+              {blogVisible && (
+                <Link to="/blog" className="footer-link">
+                  Blog
+                </Link>
+              )}
               <Link to="/contacto" className="footer-link">
                 Contacto
               </Link>

@@ -10,6 +10,7 @@ import trainingImage from "../assets/nuestrosservicios/formacion.png";
 import recruitingImage from "../assets/nuestrosservicios/reclutamiento.png";
 import repositionImage from "../assets/inicio/Hombre-vegetales-logo-scaled.png";
 import customSolutionsImage from "../assets/nuestrosservicios/soluciones.png";
+import { useSeo } from "../hooks/useSeo";
 
 const SERVICES = [
   {
@@ -78,15 +79,12 @@ const STATS = [
 ];
 
 export default function Servicios() {
+  useSeo(
+    "Servicios Transitorios y Outsourcing | Grupo Colchagua y Grupo Santa Cruz",
+    "Conoce nuestros servicios: personal transitorio, outsourcing gerencial, administrativo y operativo, reclutamiento y selección, formación y capacitación, payroll y reposición multimarca."
+  );
+
   return (
-    <>
-      <title>Servicios Transitorios y Outsourcing | Grupo Colchagua y Grupo Santa Cruz</title>
-      <meta name="description" content="Conoce nuestros servicios: personal transitorio, outsourcing gerencial, administrativo y operativo, reclutamiento y selección, formación y capacitación, payroll y reposición multimarca." />
-      <meta property="og:title" content="Servicios Transitorios y Outsourcing | Grupo Colchagua y Grupo Santa Cruz" />
-      <meta property="og:description" content="Conoce nuestros servicios: personal transitorio, outsourcing gerencial, administrativo y operativo, reclutamiento y selección, formación y capacitación, payroll y reposición multimarca." />
-      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
     <Layout>
       <div className="servicios-page">
         <section className="servicios-hero servicios-hero--static">
@@ -185,6 +183,5 @@ export default function Servicios() {
         </section>
       </div>
     </Layout>
-    </>
   );
 }

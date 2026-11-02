@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/bolsa-trabajo.css";
 import postulanteImage from "../assets/inicio/mujerpostulacion.png";
+import { useSeo } from "../hooks/useSeo";
 
 const COMPUTRABAJO_URL =
   "https://cl.computrabajo.com/empresas/ofertas-de-trabajo-de-grupo-colchagua-2E41DA812DC62D9D";
@@ -22,15 +23,12 @@ export default function BolsaDeTrabajo() {
     return () => window.clearTimeout(timeoutId);
   }, [iframeLoaded]);
 
+  useSeo(
+    "Bolsa de Trabajo | Grupo Colchagua y Grupo Santa Cruz",
+    "Encuentra oportunidades laborales en logística, ventas, administración y áreas de la salud con Grupo Colchagua y Grupo Santa Cruz."
+  );
+
   return (
-    <>
-      <title>Bolsa de Trabajo | Grupo Colchagua y Grupo Santa Cruz</title>
-      <meta name="description" content="Encuentra oportunidades laborales en logística, ventas, administración y áreas de la salud con Grupo Colchagua y Grupo Santa Cruz." />
-      <meta property="og:title" content="Bolsa de Trabajo | Grupo Colchagua y Grupo Santa Cruz" />
-      <meta property="og:description" content="Encuentra oportunidades laborales en logística, ventas, administración y áreas de la salud con Grupo Colchagua y Grupo Santa Cruz." />
-      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
     <Layout hideWhatsappFloat>
       <div className="bolsa-empleo-banner">
         <div className="bolsa-empleo-banner__content">
@@ -98,6 +96,5 @@ export default function BolsaDeTrabajo() {
         </div>
       </section>
     </Layout>
-    </>
   );
 }

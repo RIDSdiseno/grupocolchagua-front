@@ -10,6 +10,8 @@ import Servicios from "./host/Servicios";
 import ServicioDetalle from "./host/ServicioDetalle";
 import BolsaDeTrabajo from "./host/BolsaDeTrabajo";
 import Postulaciones from "./host/Postulaciones";
+import Blog from "./host/Blog";
+import BlogArticulo from "./host/BlogArticulo";
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
       <Route path="/denuncia" element={<Denuncia />} />
       <Route path="/bolsa-de-trabajo" element={<BolsaDeTrabajo />} />
       <Route path="/postulaciones" element={<Postulaciones />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/categoria/:categoria" element={<Blog />} />
+      <Route path="/blog/:slug" element={<BlogArticulo />} />
     </Routes>
   );
 }

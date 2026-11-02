@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import "../styles/home.css";
 import ContactQuick from "../components/ContactQuick";
+import { useMarcasWeb, type Client } from "../hooks/useMarcasWeb";
 
 import heroImage from "../assets/inicio/almacenamiento.png";
 import outsourcingImage from "../assets/nuestrosservicios/serviciosout.png";
@@ -10,21 +11,7 @@ import transitoryImage from "../assets/inicio/Hombre-vegetales-logo-scaled.png";
 import trainingImage from "../assets/nuestrosservicios/formacion.png";
 import recruitingImage from "../assets/nuestrosservicios/reclutamiento.png";
 import customSolutionsImage from "../assets/nuestrosservicios/soluciones.png";
-import alvi from "../assets/marcas/logo_alvi-150x150.png";
-import bci from "../assets/marcas/logo_bci-150x150.png";
-import dpsChile from "../assets/marcas/logo_dps_chile-150x150.png";
-import easy from "../assets/marcas/logo_easy-150x150.png";
-import espacioRiesco from "../assets/marcas/logo_espacio_riesco-150x150.png";
-import ikea from "../assets/marcas/logo_ikea-150x150.png";
-import ironMountain from "../assets/marcas/logo_iron_mountain-150x150.png";
-import jumbo from "../assets/marcas/logo_jumbo-150x150.png";
-import paris from "../assets/marcas/logo_paris-150x150.png";
-import santaIsabel from "../assets/marcas/logo_santa_isabel-150x150.png";
-import sodimac from "../assets/marcas/logo_sodimac-150x150.png";
-import starken from "../assets/marcas/logo_starken-3-150x150.png";
-import vinaUndurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
-import walmart from "../assets/marcas/logo_walmart.png";
-import xiaomi from "../assets/marcas/logo_xiaomi-150x150.png";
+import { useSeo } from "../hooks/useSeo";
 
 type IconName = "bolt" | "shield" | "map" | "support";
 
@@ -101,24 +88,6 @@ const STATS = [
   { value: 350, label: "Clientes en Chile", prefix: "+" },
 ];
 
-const CLIENTS = [
-  { name: "Walmart", logo: walmart },
-  { name: "Jumbo", logo: jumbo },
-  { name: "Sodimac", logo: sodimac },
-  { name: "Paris", logo: paris },
-  { name: "Easy", logo: easy },
-  { name: "IKEA", logo: ikea },
-  { name: "BCI", logo: bci },
-  { name: "Starken", logo: starken },
-  { name: "Alvi", logo: alvi },
-  { name: "Xiaomi", logo: xiaomi },
-  { name: "DPS Chile", logo: dpsChile },
-  { name: "Espacio Riesco", logo: espacioRiesco },
-  { name: "Iron Mountain", logo: ironMountain },
-  { name: "Santa Isabel", logo: santaIsabel },
-  { name: "Viña Undurraga", logo: vinaUndurraga },
-];
-
 function HomeIcon({ name }: { name: IconName }) {
   switch (name) {
     case "bolt":
@@ -156,6 +125,7 @@ export default function Home() {
   const [animatedValues, setAnimatedValues] = useState<number[]>(
     STATS.map(() => 0)
   );
+  const clients = useMarcasWeb();
 
   useEffect(() => {
     const target = statsRef.current;
@@ -209,21 +179,18 @@ export default function Home() {
   const formatStatValue = (stat: Stat, index: number) =>
     `${stat.prefix ?? ""}${animatedValues[index].toLocaleString("es-CL")}`;
 
-  const renderClientLogo = (client: (typeof CLIENTS)[number], keyPrefix = "") => (
-    <div key={`${keyPrefix}${client.name}`} className="client-logo-card">
+  const renderClientLogo = (client: Client, index: number, keyPrefix = "") => (
+    <div key={`${keyPrefix}${index}-${client.name}`} className="client-logo-card">
       <img src={client.logo} alt={client.name} loading="lazy" />
     </div>
   );
 
+  useSeo(
+    "Grupo Colchagua y Grupo Santa Cruz | Servicios Transitorios y Outsourcing en Chile",
+    "Dos especialidades, un mismo aliado. Grupo Colchagua (servicios transitorios) y Grupo Santa Cruz (outsourcing) llevan más de 10 años entregando soluciones de personal a empresas en todo Chile."
+  );
+
   return (
-    <>
-      <title>Grupo Colchagua y Grupo Santa Cruz | Servicios Transitorios y Outsourcing en Chile</title>
-      <meta name="description" content="Dos especialidades, un mismo aliado. Grupo Colchagua (servicios transitorios) y Grupo Santa Cruz (outsourcing) llevan más de 10 años entregando soluciones de personal a empresas en todo Chile." />
-      <meta property="og:title" content="Grupo Colchagua y Grupo Santa Cruz | Servicios Transitorios y Outsourcing en Chile" />
-      <meta property="og:description" content="Dos especialidades, un mismo aliado. Grupo Colchagua (servicios transitorios) y Grupo Santa Cruz (outsourcing) llevan más de 10 años entregando soluciones de personal a empresas en todo Chile." />
-      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
       <Layout>
       <div className="home">
         <section
@@ -333,30 +300,32 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-spacing clients-section">
-          <div className="home-container">
-            <div className="section-heading">
-              <span className="section-kicker">Clientes</span>
-              <h2 className="section-title">
-                Marcas que confían en nuestro trabajo
-              </h2>
-            </div>
+        {clients && clients.length > 0 && (
+          <section className="section-spacing clients-section">
+            <div className="home-container">
+              <div className="section-heading">
+                <span className="section-kicker">Clientes</span>
+                <h2 className="section-title">
+                  Marcas que confían en nuestro trabajo
+                </h2>
+              </div>
 
-            <div className="clients-marquee" aria-label="Marcas clientes">
-              <div className="clients-marquee__track">
-                <div className="clients-marquee__group">
-                  {CLIENTS.map((client) => renderClientLogo(client))}
-                </div>
+              <div className="clients-marquee" aria-label="Marcas clientes">
+                <div className="clients-marquee__track">
+                  <div className="clients-marquee__group">
+                    {clients.map((client, index) => renderClientLogo(client, index))}
+                  </div>
 
-                <div className="clients-marquee__group" aria-hidden="true">
-                  {CLIENTS.map((client) =>
-                    renderClientLogo(client, "duplicate-")
-                  )}
+                  <div className="clients-marquee__group" aria-hidden="true">
+                    {clients.map((client, index) =>
+                      renderClientLogo(client, index, "duplicate-")
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="section-spacing final-cta-section">
           <div className="home-container">
@@ -386,6 +355,5 @@ export default function Home() {
         </section>
       </div>
     </Layout>
-    </>
   );
 }

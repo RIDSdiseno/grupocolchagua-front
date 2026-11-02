@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
+import { useSeo } from "../hooks/useSeo";
 import "../styles/servicios.css";
 
 import outsourcingImage from "../assets/nuestrosservicios/servicos.png";
@@ -116,17 +117,13 @@ export default function ServicioDetalle() {
   const { slug } = useParams();
   const servicio = slug ? SERVICIOS[slug] : null;
 
+  useSeo(servicio?.seoTitle ?? null, servicio?.seoDesc ?? null);
+
   if (!servicio) {
     return <Navigate to="/servicios" replace />;
   }
 
   return (
-    <>
-      <title>{servicio.seoTitle}</title>
-      <meta name="description" content={servicio.seoDesc} />
-      <meta property="og:title" content={servicio.seoTitle} />
-      <meta property="og:description" content={servicio.seoDesc} />
-      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
     <Layout>
       <div className="servicios-page servicio-detalle-page">
         <section className="servicio-detalle-hero">
@@ -193,6 +190,5 @@ export default function ServicioDetalle() {
         </section>
       </div>
     </Layout>
-    </>
   );
 }

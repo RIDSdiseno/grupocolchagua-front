@@ -2,26 +2,18 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import "../styles/nosotros.css";
+import { useMarcasWeb } from "../hooks/useMarcasWeb";
+import {
+  listarEquipoPublico,
+  type AreaEquipo,
+  type MiembroEquipo,
+} from "../services/equipo.service";
 
 const heroNosotros = "https://res.cloudinary.com/dvqpmttci/image/upload/v1792429202/adam-young-90iwrl5pm70-unsplash_3_kj2ghc.jpg";
 import transitoryImage from "../assets/inicio/almacenamiento.png";
 import outsourcingImage from "../assets/nuestrosservicios/serviciosout.png";
+import { useSeo } from "../hooks/useSeo";
 
-import alvi from "../assets/marcas/logo_alvi-150x150.png";
-import bci from "../assets/marcas/logo_bci-150x150.png";
-import dpsChile from "../assets/marcas/logo_dps_chile-150x150.png";
-import easy from "../assets/marcas/logo_easy-150x150.png";
-import espacioRiesco from "../assets/marcas/logo_espacio_riesco-150x150.png";
-import ikea from "../assets/marcas/logo_ikea-150x150.png";
-import ironMountain from "../assets/marcas/logo_iron_mountain-150x150.png";
-import jumbo from "../assets/marcas/logo_jumbo-150x150.png";
-import paris from "../assets/marcas/logo_paris-150x150.png";
-import santaIsabel from "../assets/marcas/logo_santa_isabel-150x150.png";
-import sodimac from "../assets/marcas/logo_sodimac-150x150.png";
-import starken from "../assets/marcas/logo_starken-3-150x150.png";
-import vinaUndurraga from "../assets/marcas/logo_vina_undurraga-150x150.png";
-import walmart from "../assets/marcas/logo_walmart.png";
-import xiaomi from "../assets/marcas/logo_xiaomi-150x150.png";
 
 const STATS = [
   { target: 10,   label: "años de trayectoria",      prefix: "+", dotted: false },
@@ -85,38 +77,81 @@ const VALORES = [
   { title: "Compromiso", description: "Respondemos con rapidez cuando la operación lo necesita." },
 ];
 
-const AREAS_EQUIPO = [
-  { area: "Dirección", descripcion: "Conducción estratégica del grupo y las decisiones que guían el servicio a clientes y trabajadores." },
-  { area: "Comercial", descripcion: "Tu primer contacto para cotizar y diseñar la solución que necesita tu empresa." },
-  { area: "Operaciones", descripcion: "El equipo que está en terreno, junto a cada cliente, asegurando que el servicio funcione todos los días." },
-  { area: "Reclutamiento y Selección", descripcion: "Buscamos, evaluamos y elegimos a las personas que llegan a cada empresa." },
-  { area: "Prevención de Riesgos", descripcion: "Cuidamos la seguridad de nuestros trabajadores en cada instalación." },
-  { area: "Gestión de Personas", descripcion: "Contratos, remuneraciones y todo lo que nuestros trabajadores necesitan resolver." },
-  { area: "Administración y Finanzas", descripcion: "Gestión contable, presupuestaria y financiera de ambas marcas del grupo." },
-  { area: "Logística y Servicios Generales", descripcion: "Uniformes, implementos y la atención en nuestras oficinas." },
+// Respaldo si la API no responde. Las áreas y sus personas se administran desde
+// la intranet (Marketing → Herramientas → Equipo).
+const AREAS_EQUIPO_RESPALDO: AreaEquipo[] = [
+  { id: -1, nombre: "Dirección", descripcion: "Conducción estratégica del grupo y las decisiones que guían el servicio a clientes y trabajadores.", miembros: [] },
+  { id: -2, nombre: "Comercial", descripcion: "Tu primer contacto para cotizar y diseñar la solución que necesita tu empresa.", miembros: [] },
+  { id: -3, nombre: "Operaciones", descripcion: "El equipo que está en terreno, junto a cada cliente, asegurando que el servicio funcione todos los días.", miembros: [] },
+  { id: -4, nombre: "Reclutamiento y Selección", descripcion: "Buscamos, evaluamos y elegimos a las personas que llegan a cada empresa.", miembros: [] },
+  { id: -5, nombre: "Prevención de Riesgos", descripcion: "Cuidamos la seguridad de nuestros trabajadores en cada instalación.", miembros: [] },
+  { id: -6, nombre: "Gestión de Personas", descripcion: "Contratos, remuneraciones y todo lo que nuestros trabajadores necesitan resolver.", miembros: [] },
+  { id: -7, nombre: "Administración y Finanzas", descripcion: "Gestión contable, presupuestaria y financiera de ambas marcas del grupo.", miembros: [] },
+  { id: -8, nombre: "Logística y Servicios Generales", descripcion: "Uniformes, implementos y la atención en nuestras oficinas.", miembros: [] },
 ];
 
-const CLIENTS = [
-  { name: "Walmart", logo: walmart },
-  { name: "Jumbo", logo: jumbo },
-  { name: "Sodimac", logo: sodimac },
-  { name: "Paris", logo: paris },
-  { name: "Easy", logo: easy },
-  { name: "IKEA", logo: ikea },
-  { name: "BCI", logo: bci },
-  { name: "Starken", logo: starken },
-  { name: "Alvi", logo: alvi },
-  { name: "Xiaomi", logo: xiaomi },
-  { name: "DPS Chile", logo: dpsChile },
-  { name: "Espacio Riesco", logo: espacioRiesco },
-  { name: "Iron Mountain", logo: ironMountain },
-  { name: "Santa Isabel", logo: santaIsabel },
-  { name: "Viña Undurraga", logo: vinaUndurraga },
-];
+// Al presionar la foto se abre el LinkedIn de la persona.
+function PersonaEquipo({ miembro }: { miembro: MiembroEquipo }) {
+  const iniciales = miembro.nombre
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((parte) => parte[0])
+    .join("")
+    .toUpperCase();
+
+  const foto = miembro.fotoUrl ? (
+    <img src={miembro.fotoUrl} alt={miembro.nombre} loading="lazy" />
+  ) : (
+    <span aria-hidden="true">{iniciales}</span>
+  );
+
+  return (
+    <li className="nosotros-persona">
+      {miembro.linkedinUrl ? (
+        <a
+          href={miembro.linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nosotros-persona-foto nosotros-persona-foto--link"
+          aria-label={`Ver LinkedIn de ${miembro.nombre}`}
+          title={`Ver LinkedIn de ${miembro.nombre}`}
+        >
+          {foto}
+          <span className="nosotros-persona-in" aria-hidden="true">in</span>
+        </a>
+      ) : (
+        <div className="nosotros-persona-foto">{foto}</div>
+      )}
+      <div className="nosotros-persona-info">
+        <p className="nosotros-persona-nombre">{miembro.nombre}</p>
+        <p className="nosotros-persona-cargo">{miembro.cargo}</p>
+        {miembro.resumen && <p className="nosotros-persona-resumen">{miembro.resumen}</p>}
+      </div>
+    </li>
+  );
+}
 
 export default function Nosotros() {
   const [statsStarted, setStatsStarted] = useState(false);
   const statsRef = useRef<HTMLElement>(null);
+  const clients = useMarcasWeb();
+  const [areasEquipo, setAreasEquipo] = useState<AreaEquipo[] | null>(null);
+
+  useEffect(() => {
+    let activo = true;
+
+    listarEquipoPublico()
+      .then((areas) => {
+        if (activo) setAreasEquipo(areas);
+      })
+      .catch(() => {
+        if (activo) setAreasEquipo(AREAS_EQUIPO_RESPALDO);
+      });
+
+    return () => {
+      activo = false;
+    };
+  }, []);
 
   useEffect(() => {
     const el = statsRef.current;
@@ -129,15 +164,12 @@ export default function Nosotros() {
     return () => observer.disconnect();
   }, []);
 
+  useSeo(
+    "Quiénes Somos | Grupo Colchagua y Grupo Santa Cruz",
+    "Más de 10 años entregando soluciones de personal a empresas en Chile. Grupo Colchagua en Servicios Transitorios y Grupo Santa Cruz en Outsourcing."
+  );
+
   return (
-    <>
-      <title>Quiénes Somos | Grupo Colchagua y Grupo Santa Cruz</title>
-      <meta name="description" content="Más de 10 años entregando soluciones de personal a empresas en Chile. Grupo Colchagua en Servicios Transitorios y Grupo Santa Cruz en Outsourcing." />
-      <meta property="og:title" content="Quiénes Somos | Grupo Colchagua y Grupo Santa Cruz" />
-      <meta property="og:description" content="Más de 10 años entregando soluciones de personal a empresas en Chile. Grupo Colchagua en Servicios Transitorios y Grupo Santa Cruz en Outsourcing." />
-      <meta property="og:image" content="https://grupocolchagua.cl/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
     <Layout>
       <div className="nosotros-page">
 
@@ -300,10 +332,17 @@ export default function Nosotros() {
               </p>
             </div>
             <div className="nosotros-areas-grid">
-              {AREAS_EQUIPO.map((item) => (
-                <article key={item.area} className="nosotros-area-card">
-                  <h3 className="nosotros-area-name">{item.area}</h3>
-                  {item.descripcion && <p className="nosotros-area-desc">{item.descripcion}</p>}
+              {areasEquipo?.map((area) => (
+                <article key={area.id} className="nosotros-area-card">
+                  <h3 className="nosotros-area-name">{area.nombre}</h3>
+                  {area.descripcion && <p className="nosotros-area-desc">{area.descripcion}</p>}
+                  {area.miembros.length > 0 && (
+                    <ul className="nosotros-personas">
+                      {area.miembros.map((miembro) => (
+                        <PersonaEquipo key={miembro.id} miembro={miembro} />
+                      ))}
+                    </ul>
+                  )}
                 </article>
               ))}
             </div>
@@ -324,32 +363,34 @@ export default function Nosotros() {
         </section>
 
         {/* 9. Clientes */}
-        <section className="brands-section">
-          <div className="nosotros-container">
-            <div className="brands-heading">
-              <span className="section-kicker">Clientes</span>
-              <h2 className="section-title">Empresas que confían en nosotros</h2>
-            </div>
-            <div className="clients-marquee" aria-label="Marcas clientes">
-              <div className="clients-marquee__track">
-                <div className="clients-marquee__group">
-                  {CLIENTS.map((c) => (
-                    <div key={c.name} className="client-logo-card">
-                      <img src={c.logo} alt={c.name} loading="lazy" />
-                    </div>
-                  ))}
-                </div>
-                <div className="clients-marquee__group" aria-hidden="true">
-                  {CLIENTS.map((c) => (
-                    <div key={`dup-${c.name}`} className="client-logo-card">
-                      <img src={c.logo} alt={c.name} loading="lazy" />
-                    </div>
-                  ))}
+        {clients && clients.length > 0 && (
+          <section className="brands-section">
+            <div className="nosotros-container">
+              <div className="brands-heading">
+                <span className="section-kicker">Clientes</span>
+                <h2 className="section-title">Empresas que confían en nosotros</h2>
+              </div>
+              <div className="clients-marquee" aria-label="Marcas clientes">
+                <div className="clients-marquee__track">
+                  <div className="clients-marquee__group">
+                    {clients.map((c, i) => (
+                      <div key={`${i}-${c.name}`} className="client-logo-card">
+                        <img src={c.logo} alt={c.name} loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="clients-marquee__group" aria-hidden="true">
+                    {clients.map((c, i) => (
+                      <div key={`dup-${i}-${c.name}`} className="client-logo-card">
+                        <img src={c.logo} alt={c.name} loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* 10. Cierre CTA */}
         <section className="section-spacing final-cta-section">
@@ -377,6 +418,5 @@ export default function Nosotros() {
 
       </div>
     </Layout>
-    </>
   );
 }
